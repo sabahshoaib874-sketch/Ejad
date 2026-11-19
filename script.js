@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =================================
@@ -16,10 +15,76 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("site-search");
     const searchButton = document.getElementById("search-button");
 
-    const serviceCards = document.querySelectorAll(".service-card");
+    const serviceCards = document.querySelectorAll("#view-home .service-card");
 
     const themeToggle = document.getElementById("theme-toggle");
     const themeIcon = document.getElementById("theme-icon");
+
+    const homeView = document.getElementById("view-home");
+    const subViews = document.querySelectorAll(".app-page-view");
+    const pageTriggers = document.querySelectorAll("[data-page]");
+
+
+    /* =================================
+       INTERNAL SPA NAVIGATION
+    ================================= */
+
+    function navigateToPage(pageName) {
+        if (!pageName || pageName === "home") {
+            subViews.forEach(function (view) {
+                view.classList.remove("active-view");
+            });
+            if (homeView) {
+                homeView.style.display = "block";
+            }
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+
+        const targetView = document.getElementById("view-" + pageName);
+        if (targetView) {
+            if (homeView) {
+                homeView.style.display = "none";
+            }
+            subViews.forEach(function (view) {
+                view.classList.remove("active-view");
+            });
+            targetView.classList.add("active-view");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    }
+
+    pageTriggers.forEach(function (trigger) {
+        trigger.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetPage = trigger.getAttribute("data-page");
+            hideSidebar();
+            if (notifBox) {
+                notifBox.classList.remove("show");
+            }
+            navigateToPage(targetPage);
+        });
+    });
+
+    /* INTERNAL FORMS HANDLING */
+    const internalForms = document.querySelectorAll(".app-internal-form");
+    internalForms.forEach(function (form) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (form.id === "qr-generator-form") {
+                const name = document.getElementById("qr-name").value.trim();
+                const id = document.getElementById("qr-id").value.trim();
+                const phone = document.getElementById("qr-phone").value.trim();
+                const qrData = encodeURIComponent("منصة إيجاد | الاسم: " + name + " | الرقم: " + id + " | الجوال: " + phone);
+                const output = document.getElementById("qr-output");
+                output.innerHTML = '<img src="https://qrserver.com' + qrData + '" alt="QR Code" style="border-radius:10px; padding:8px; background:#fff;"><p style="margin-top:8px; font-size:0.9rem;">تم إنشاء الرمز بنجاح، يمكنك حفظ الصورة وطباعتها.</p>';
+                return;
+            }
+            alert("تم استلام طلبك وتسجيله في النظام بنجاح.");
+            form.reset();
+            navigateToPage("home");
+        });
+    });
 
 
     /* =================================
@@ -118,6 +183,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function performSearch() {
 
         if (!searchInput) return;
+
+        if (homeView && homeView.style.display === "none") {
+            navigateToPage("home");
+        }
 
         const searchValue = searchInput.value.trim().toLowerCase();
 
