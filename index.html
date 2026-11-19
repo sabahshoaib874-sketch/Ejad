@@ -31,8 +31,8 @@
             to { opacity: 1; transform: scale(1); }
         }
         .ejad-modal-box {
-            background: var(--card-bg, #ffffff);
-            color: var(--text-color, #1e293b);
+            background: #ffffff;
+            color: #1e293b;
             width: 100%;
             max-width: 500px;
             border-radius: 20px;
@@ -42,8 +42,7 @@
             max-height: 88vh;
             overflow-y: auto;
         }
-        body.dark .ejad-modal-box,
-        [data-theme="dark"] .ejad-modal-box {
+        body.dark-mode .ejad-modal-box {
             background: #1e293b;
             color: #f8fafc;
         }
@@ -91,12 +90,9 @@
             font-size: 0.95rem;
             box-sizing: border-box;
         }
-        body.dark .ejad-form-group input,
-        body.dark .ejad-form-group select,
-        body.dark .ejad-form-group textarea,
-        [data-theme="dark"] .ejad-form-group input,
-        [data-theme="dark"] .ejad-form-group select,
-        [data-theme="dark"] .ejad-form-group textarea {
+        body.dark-mode .ejad-form-group input,
+        body.dark-mode .ejad-form-group select,
+        body.dark-mode .ejad-form-group textarea {
             background: #0f172a;
             color: #f8fafc;
             border-color: #334155;
@@ -320,6 +316,16 @@
     <a href="#" onclick="openModal('modal-report'); return false;">الإبلاغ عن غرض مفقود</a>
     <a href="#" onclick="openModal('modal-lost-list'); return false;">قائمة المفقودات</a>
     <a href="#" onclick="openModal('modal-support'); return false;">الدعم الفني</a>
+    <a href="#" onclick="openModal('modal-info'); return false;">عن المنصة</a>
+    <a href="#" onclick="openModal('modal-help'); return false;">المساعدة</a>
+
+</aside>
+
+<!-- HERO -->
+<header class="hero">
+
+    <div class="hero-layer"></div>
+
 <!-- MODALS (نوافذ العمليات داخل نفس الصفحة) -->
 <div id="modal-new-item" class="ejad-modal-overlay">
     <div class="ejad-modal-box">
@@ -519,29 +525,5 @@
 
 <script src="script.js"></script>
 
-<script>
-    function openModal(id) {
-        closeAllModals();
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar) sidebar.classList.remove('active', 'open');
-        const modal = document.getElementById(id);
-        if (modal) {
-            modal.classList.add('active');
-        }
-    }
-
-    function closeModal(id) {
-        const modal = document.getElementById(id);
-        if (modal) {
-            modal.classList.remove('active');
-        }
-    }
-
-    function closeAllModals() {
-        document.querySelectorAll('.ejad-modal-overlay').forEach(m => {
-            m.classList.remove('active');
-        });
-    }
-
-    document.querySelectorAll('.ejad-modal-overlay').forEach(overlay => {
-        overlay.addEventListener('click', function(e) {
+</body>
+</html>
