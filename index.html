@@ -2,348 +2,242 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#eef3f8">
-
     <title>منصة إيجاد الرقمية بالكلية التقنية بالطائف</title>
-
     <link rel="stylesheet" href="style.css">
-    <style>
-        html, body {
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-        @media (max-width: 768px) {
-            .nav-glass {
-                flex-wrap: wrap;
-                padding: 10px 12px;
-                gap: 8px;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .nav-logo {
-                max-width: 130px;
-                height: auto;
-            }
-            .nav-search-bar {
-                order: 3;
-                width: 100%;
-                flex: 1 1 100%;
-                margin: 0;
-                box-sizing: border-box;
-            }
-            .nav-icons {
-                margin-right: auto;
-                gap: 6px;
-            }
-            .hero {
-                padding: 30px 15px;
-                text-align: center;
-                box-sizing: border-box;
-            }
-            .hero-content h1 {
-                font-size: 1.45rem;
-                line-height: 1.5;
-            }
-            .hero-content p {
-                font-size: 0.95rem;
-            }
-            .services-list, .app-page-view {
-                padding: 15px 12px;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .service-card {
-                width: 100%;
-                box-sizing: border-box;
-                padding: 16px;
-            }
-            .sidebar {
-                width: 80%;
-                max-width: 300px;
-            }
-            .notif-box {
-                width: 92%;
-                left: 4%;
-                right: 4%;
-                box-sizing: border-box;
-            }
-        }
-        .app-page-view {
-            display: none;
-            max-width: 800px;
-            margin: 20px auto;
-        }
-        .app-page-view.active-view {
-            display: block;
-        }
-        .app-back-btn {
-            background: transparent;
-            border: 1px solid currentColor;
-            color: inherit;
-            padding: 8px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 0.95rem;
-            margin-bottom: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .app-req-list {
-            list-style: none;
-            padding: 0;
-            margin: 12px 0 20px 0;
-        }
-        .app-req-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(128, 128, 128, 0.2);
-            font-size: 0.95rem;
-        }
-        .app-form-group {
-            margin-bottom: 14px;
-            text-align: right;
-        }
-        .app-form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        .app-form-group input,
-        .app-form-group select,
-        .app-form-group textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
-            border: 1px solid rgba(128, 128, 128, 0.35);
-            background: rgba(255, 255, 255, 0.08);
-            color: inherit;
-            font-family: inherit;
-            box-sizing: border-box;
-        }
-        .app-submit-btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: none;
-            background: #1b6ca8;
-            color: #fff;
-            font-family: inherit;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-    </style>
 </head>
-
 <body>
 
-<!-- SVG ICON SYSTEM -->
-<svg xmlns="http://w3.org"
-     class="svg-library" aria-hidden="true">
-
-    <symbol id="i-search" viewBox="0 0 24 24">
-        <circle cx="10.8" cy="10.8" r="6.8"/>
-        <path d="m16 16 5 5"/>
-    </symbol>
-
-    <symbol id="i-info" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M12 11v6M12 7h.01"/>
-    </symbol>
-
-    <symbol id="i-help" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M9.5 9a2.6 2.6 0 1 1 4.5 1.8c-1.2 1.1-2 1.5-2 3"/>
-        <path d="M12 17.5h.01"/>
-    </symbol>
-
-    <symbol id="i-bell" viewBox="0 0 24 24">
-        <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-        <path d="M10 21h4"/>
-    </symbol>
-
-    <symbol id="i-menu" viewBox="0 0 24 24">
-        <path d="M4 6h16M4 12h16M4 18h16"/>
-    </symbol>
-
-    <symbol id="i-add" viewBox="0 0 24 24">
-        <path d="M12 5v14M5 12h14"/>
-    </symbol>
-
-    <symbol id="i-qr" viewBox="0 0 24 24">
-        <rect x="3" y="3" width="7" height="7" rx="1"/>
-        <rect x="14" y="3" width="7" height="7" rx="1"/>
-        <rect x="3" y="14" width="7" height="7" rx="1"/>
-        <path d="M14 14h3v3h-3zM20 14v2M14 20h2M19 19h2v2h-2z"/>
-    </symbol>
-
-    <symbol id="i-list" viewBox="0 0 24 24">
-        <path d="M9 6h11M9 12h11M9 18h11"/>
-        <circle cx="4" cy="6" r="1"/>
-        <circle cx="4" cy="12" r="1"/>
-        <circle cx="4" cy="18" r="1"/>
-    </symbol>
-
-    <symbol id="i-support" viewBox="0 0 24 24">
-        <path d="M3 13v-2a9 9 0 0 1 18 0v2"/>
-        <rect x="3" y="12" width="4" height="7" rx="2"/>
-        <rect x="17" y="12" width="4" height="7" rx="2"/>
-        <path d="M17 19a5 5 0 0 1-5 3h-2"/>
-    </symbol>
-
-    <symbol id="i-package" viewBox="0 0 24 24">
-        <path d="m12 3 9 5-9 5-9-5 9-5Z"/>
-        <path d="M3 8v9l9 5 9-5V8M12 13v9M7.5 5.5l9 5"/>
-    </symbol>
-
-    <symbol id="i-star" viewBox="0 0 24 24">
-        <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>
-    </symbol>
-
-    <symbol id="i-sun" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="4"/>
-        <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>
-    </symbol>
-
-    <symbol id="i-moon" viewBox="0 0 24 24">
-        <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"/>
-    </symbol>
-
+<svg xmlns="http://w3.org" class="svg-library" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.6 2.6 0 1 1 4.5 1.8c-1.2 1.1-2 1.5-2 3"/><path d="M12 17.5h.01"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-add" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v2M14 20h2M19 19h2v2h-2z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></symbol>
+    <symbol id="i-support" viewBox="0 0 24 24"><path d="M3 13v-2a9 9 0 0 1 18 0v2"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/><path d="M17 19a5 5 0 0 1-5 3h-2"/></symbol>
+    <symbol id="i-package" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="M3 8v9l9 5 9-5V8M12 13v9M7.5 5.5l9 5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"/></symbol>
 </svg>
 
-<!-- NAVIGATION -->
 <nav class="nav-glass">
-
-    <img src="logo.png"
-         class="nav-logo"
-         alt="شعار منصة إيجاد"
-         data-page="home"
-         style="cursor: pointer;">
-
+    <img src="logo.png" class="nav-logo" alt="شعار منصة إيجاد" onclick="openAppPage('home')" style="cursor:pointer;">
     <div class="nav-search-bar">
-
-        <button class="search-action" id="search-button"
-                aria-label="بحث" type="button">
-            <svg class="ui-icon">
-                <use href="#i-search"></use>
-            </svg>
-        </button>
-
-        <input type="search"
-               placeholder="ابحث هنا..."
-               id="site-search">
-
+        <button class="search-action" id="search-button" aria-label="بحث" type="button"><svg class="ui-icon"><use href="#i-search"></use></svg></button>
+        <input type="search" placeholder="ابحث هنا..." id="site-search">
     </div>
-
-    <!-- NOTIFICATIONS -->
     <div id="notif-box" class="notif-box">
-
-        <div class="notif-header">
-            <h3>التنبيهات</h3>
-            <button id="close-notif" type="button"
-                    aria-label="إغلاق">&times;</button>
-        </div>
-
-        <div class="notif-item">
-            <svg class="ui-icon"><use href="#i-bell"/></svg>
-            تم إضافة غرض جديد في قائمة المفقودات.
-        </div>
-
-        <div class="notif-item">
-            <svg class="ui-icon"><use href="#i-package"/></svg>
-            تم العثور على غرض مطابق لبلاغك.
-        </div>
-
-        <div class="notif-item">
-            <svg class="ui-icon"><use href="#i-star"/></svg>
-            لا توجد تنبيهات جديدة حالياً.
-        </div>
-
+        <div class="notif-header"><h3>التنبيهات</h3><button id="close-notif" type="button" aria-label="إغلاق">&times;</button></div>
+        <div class="notif-item"><svg class="ui-icon"><use href="#i-bell"/></svg>تم إضافة غرض جديد في قائمة المفقودات.</div>
+        <div class="notif-item"><svg class="ui-icon"><use href="#i-package"/></svg>تم العثور على غرض مطابق لبلاغك.</div>
+        <div class="notif-item"><svg class="ui-icon"><use href="#i-star"/></svg>لا توجد تنبيهات جديدة حالياً.</div>
     </div>
-
-    <!-- NAV ICONS -->
     <div class="nav-icons">
-
-        <button class="nav-btn"
-                data-page="info"
-                aria-label="معلومات">
-            <svg class="ui-icon"><use href="#i-info"/></svg>
-        </button>
-
-        <button class="nav-btn"
-                data-page="help"
-                aria-label="المساعدة">
-            <svg class="ui-icon"><use href="#i-help"/></svg>
-        </button>
-
-        <button class="nav-btn" id="btn-bell"
-                aria-label="التنبيهات">
-            <svg class="ui-icon"><use href="#i-bell"/></svg>
-        </button>
-
-        <button class="nav-btn" id="theme-toggle"
-                aria-label="تفعيل الوضع الليلي"
-                title="تفعيل الوضع الليلي">
-            <svg class="ui-icon">
-                <use id="theme-icon" href="#i-moon"/>
-            </svg>
-        </button>
-
-        <button class="nav-btn" id="btn-menu"
-                aria-label="القائمة">
-            <svg class="ui-icon"><use href="#i-menu"/></svg>
-        </button>
-
+        <button class="nav-btn" type="button" onclick="openAppPage('info')" aria-label="معلومات"><svg class="ui-icon"><use href="#i-info"/></svg></button>
+        <button class="nav-btn" type="button" onclick="openAppPage('help')" aria-label="المساعدة"><svg class="ui-icon"><use href="#i-help"/></svg></button>
+        <button class="nav-btn" type="button" id="btn-bell" aria-label="التنبيهات"><svg class="ui-icon"><use href="#i-bell"/></svg></button>
+        <button class="nav-btn" type="button" id="theme-toggle" aria-label="تفعيل الوضع الليلي"><svg class="ui-icon"><use id="theme-icon" href="#i-moon"/></svg></button>
+        <button class="nav-btn" type="button" id="btn-menu" aria-label="القائمة"><svg class="ui-icon"><use href="#i-menu"/></svg></button>
     </div>
-
 </nav>
 
-<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
-
-    <div class="sidebar-header">
-        <h3>منصة إيجاد الرقمية</h3>
-        <button id="closeSidebar" type="button"
-                aria-label="إغلاق">&times;</button>
-    </div>
-
-    <a href="#home" data-page="home">الرئيسية</a>
-    <a href="#new-item" data-page="new-item">تسجيل غرض جديد</a>
-    <a href="#qr" data-page="qr">إنشاء QR</a>
-    <a href="#report" data-page="report">الإبلاغ عن غرض مفقود</a>
-    <a href="#lost-list" data-page="lost-list">قائمة المفقودات</a>
-    <a href="#support" data-page="support">الدعم الفني</a>
-    <a href="#info" data-page="info">عن المنصة</a>
-    <a href="#help" data-page="help">المساعدة</a>
-
+    <div class="sidebar-header"><h3>منصة إيجاد الرقمية</h3><button id="closeSidebar" type="button" aria-label="إغلاق">&times;</button></div>
+    <a href="javascript:void(0)" onclick="openAppPage('home')">الرئيسية</a>
+    <a href="javascript:void(0)" onclick="openAppPage('new-item')">تسجيل غرض جديد</a>
+    <a href="javascript:void(0)" onclick="openAppPage('qr')">إنشاء QR</a>
+    <a href="javascript:void(0)" onclick="openAppPage('report')">الإبلاغ عن غرض مفقود</a>
+    <a href="javascript:void(0)" onclick="openAppPage('lost-list')">قائمة المفقودات</a>
+    <a href="javascript:void(0)" onclick="openAppPage('support')">الدعم الفني</a>
+    <a href="javascript:void(0)" onclick="openAppPage('info')">عن المنصة</a>
+    <a href="javascript:void(0)" onclick="openAppPage('help')">المساعدة</a>
 </aside>
-
-<!-- HOME VIEW -->
-<main id="view-home">
-    <!-- HERO -->
+    <div id="view-home">
     <header class="hero">
-
         <div class="hero-layer"></div>
-
         <div class="hero-content">
-
             <h1>منصة إيجاد الرقمية بالكلية التقنية بالطائف</h1>
-
-            <p>
-                منصة إلكترونية متطورة للإبلاغ عن المفقودات
-                وتسجيلها وتتبعها واسترجاعها
-            </p>
-
+            <p>منصة إلكترونية متطورة للإبلاغ عن المفقودات وتسجيلها وتتبعها واسترجاعها</p>
         </div>
-
         <div class="scroll-bounce">⟱</div>
-
     </header>
 
-    <!-- SERVICES -->
     <section class="services-list">
+        <a href="javascript:void(0)" onclick="openAppPage('new-item')" class="service-card">
+            <div class="icon-circle"><svg class="ui-icon"><use href="#i-add"/></svg></div>
+            <div class="service-text">
+                <h3>تسجيل غرض جديد</h3>
+                <p>استخدم هذه الخدمة لتسجيل غرض جديد مفقود أو معثور عليه في النظام.</p>
+            </div>
+        </a>
+
+        <a href="javascript:void(0)" onclick="openAppPage('qr')" class="service-card">
+            <div class="icon-circle"><svg class="ui-icon"><use href="#i-qr"/></svg></div>
+            <div class="service-text">
+                <h3>إنشاء QR</h3>
+                <p>إنشاء رمز QR مخصص ليسهل الوصول إلى بيانات الغرض بسرعة.</p>
+            </div>
+        </a>
+
+        <a href="javascript:void(0)" onclick="openAppPage('report')" class="service-card">
+            <div class="icon-circle"><svg class="ui-icon"><use href="#i-search"/></svg></div>
+            <div class="service-text">
+                <h3>الإبلاغ عن غرض مفقود</h3>
+                <p>إرسال بلاغ عن غرض مفقود مع تفاصيل تساعد في العثور عليه.</p>
+            </div>
+        </a>
+
+        <a href="javascript:void(0)" onclick="openAppPage('lost-list')" class="service-card">
+            <div class="icon-circle"><svg class="ui-icon"><use href="#i-list"/></svg></div>
+            <div class="service-text">
+                <h3>قائمة المفقودات</h3>
+                <p>عرض جميع الأغراض والبلاغات في النظام.</p>
+            </div>
+        </a>
+
+        <a href="javascript:void(0)" onclick="openAppPage('support')" class="service-card">
+            <div class="icon-circle"><svg class="ui-icon"><use href="#i-support"/></svg></div>
+            <div class="service-text">
+                <h3>الدعم الفني</h3>
+                <p>تواصل مباشر مع فريق الدعم لحل أي مشكلة تواجهك.</p>
+            </div>
+        </a>
+    </section>
+</div>
+
+<section id="view-new-item" class="app-page-view" style="display:none;">
+    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
+    <div class="service-card app-detail-card">
+        <div class="service-text" style="width:100%;">
+            <h3>تسجيل غرض جديد</h3>
+            <p><strong>متطلبات الخدمة:</strong></p>
+            <ul class="app-req-list">
+                <li>• تحديد حالة الغرض (معثور عليه داخل الكلية / مفقود).</li>
+                <li>• كتابة اسم الغرض ووصفه الدقيق (اللون، النوع، العلامة المميزة).</li>
+                <li>• تحديد المبنى أو القاعة التي تم العثور على الغرض فيها.</li>
+                <li>• إدخال الرقم التدريبي أو الوظيفي ورقم الجوال للتواصل.</li>
+            </ul>
+            <form onsubmit="submitInternalForm(event, 'تم تسجيل الغرض في النظام بنجاح')">
+                <div class="app-form-group"><label>حالة الغرض</label><select required><option value="found">غرض معثور عليه</option><option value="lost">غرض مفقود</option></select></div>
+                <div class="app-form-group"><label>اسم الغرض</label><input type="text" placeholder="مثال: محفظة جلدية، بطاقة تدريبية" required></div>
+                <div class="app-form-group"><label>مكان العثور / الفقدان</label><input type="text" placeholder="مثال: مبنى 4 - قاعة 102" required></div>
+                <div class="app-form-group"><label>الوصف والتفاصيل</label><textarea rows="3" placeholder="اكتب المواصفات الدقيقة..." required></textarea></div>
+                <div class="app-form-group"><label>الرقم التدريبي / الوظيفي ورقم الجوال</label><input type="text" placeholder="أدخل رقمك التدريبي ورقم الجوال" required></div>
+                <button type="submit" class="app-submit-btn">حفظ وتسجيل الغرض</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="view-qr" class="app-page-view" style="display:none;">
+    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
+    <div class="service-card app-detail-card">
+        <div class="service-text" style="width:100%;">
+            <h3>إنشاء رمز QR للأغراض</h3>
+            <p><strong>متطلبات الخدمة:</strong></p>
+            <ul class="app-req-list">
+                <li>• إدخال الاسم الكامل للمتدرب أو الموظف.</li>
+                <li>• إدخال الرقم التدريبي أو الوظيفي بالكلية التقنية بالطائف.</li>
+                <li>• إدخال رقم الجوال للتواصل الفوري عند العثور على الغرض.</li>
+            </ul>
+            <form onsubmit="generateInternalQR(event)">
+                <div class="app-form-group"><label>الاسم الكامل</label><input type="text" id="qr-name" required></div>
+                <div class="app-form-group"><label>الرقم التدريبي / الوظيفي</label><input type="text" id="qr-id" required></div>
+                <div class="app-form-group"><label>رقم الجوال</label><input type="tel" id="qr-phone" required></div>
+                <button type="submit" class="app-submit-btn">توليد رمز QR</button>
+                <div id="qr-output" style="text-align:center; margin-top:15px;"></div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="view-report" class="app-page-view" style="display:none;">
+    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
+    <div class="service-card app-detail-card">
+        <div class="service-text" style="width:100%;">
+            <h3>الإبلاغ عن غرض مفقود</h3>
+            <p><strong>متطلبات الخدمة:</strong></p>
+            <ul class="app-req-list">
+                <li>• تحديد نوع الغرض المفقود بدقة.</li>
+                <li>• ذكر التاريخ والوقت التقريبي لفقدان الغرض.</li>
+                <li>• تحديد آخر موقع تواجدت فيه داخل الكلية وعلامات الملكية.</li>
+            </ul>
+            <form onsubmit="submitInternalForm(event, 'تم إرسال بلاغك بنجاح')">
+                <div class="app-form-group"><label>نوع الغرض المفقود</label><input type="text" required></div>
+                <div class="app-form-group"><label>تاريخ ووقت الفقدان</label><input type="datetime-local" required></div>
+                <div class="app-form-group"><label>آخر موقع متوقع</label><input type="text" required></div>
+                <div class="app-form-group"><label>علامات إثبات الملكية</label><textarea rows="3" required></textarea></div>
+                <button type="submit" class="app-submit-btn">إرسال البلاغ</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="view-lost-list" class="app-page-view" style="display:none;">
+    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
+    <div class="service-card app-detail-card">
+        <div class="service-text" style="width:100%;">
+            <h3>قائمة المفقودات والمعثورات</h3>
+            <p><strong>متطلبات الاستلام:</strong></p>
+            <ul class="app-req-list">
+                <li>• مطابقة مواصفات الغرض المعروض مع غرضك المفقود.</li>
+                <li>• التوجه لمكتب شؤون المتدربين وإبراز البطاقة التدريبية.</li>
+            </ul>
+            <div class="notif-item"><strong>• حقيبة لابتوب سوداء</strong> — وُجدت في مبنى 2</div>
+            <div class="notif-item"><strong>• مفاتيح سيارة</strong> — وُجدت في الساحة الرئيسية</div>
+            <div class="notif-item"><strong>• بطاقة تدريبية</strong> — وُجدت في معمل 14</div>
+        </div>
+    </div>
+</section>
+
+<section id="view-support" class="app-page-view" style="display:none;">
+    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
+    <div class="service-card app-detail-card">
+        <div class="service-text" style="width:100%;">
+            <h3>الدعم الفني</h3>
+            <p><strong>متطلبات التواصل:</strong></p>
+            <ul class="app-req-list">
+                <li>• إدخال الاسم والرقم التدريبي وشرح المشكلة بدقة.</li>
+            </ul>
+            <form onsubmit="submitInternalForm(event, 'تم إرسال رسالتك للدعم الفني')">
+                <div class="app-form-group"><label>الاسم والرقم التدريبي</label><input type="text" required></div>
+                <div class="app-form-group"><label>تفاصيل المشكلة</label><textarea rows="3" required></textarea></div>
+                <button type="submit" class="app-submit-btn">إرسال</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="view-info" class="app-page-view" style="display:none;">
+    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
+    <div class="service-card app-detail-card">
+        <div class="service-text" style="width:100%;">
+            <h3>عن منصة إيجاد الرقمية</h3>
+            <p>منصة إلكترونية مخصصة لمنسوبي ومتدربي الكلية التقنية بالطائف لتنظيم عملية الإبلاغ عن المفقودات والمعثورات وتسجيلها واسترجاعها بكل سهولة وأمان.</p>
+        </div>
+    </div>
+</section>
+
+<section id="view-help" class="app-page-view" style="display:none;">
+    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
+    <div class="service-card app-detail-card">
+        <div class="service-text" style="width:100%;">
+            <h3>المساعدة ودليل الاستخدام</h3>
+            <ul class="app-req-list">
+                <li><strong>1. إذا وجدت غرضاً:</strong> اختر "تسجيل غرض جديد" وأدخل مواصفاته ومكانه.</li>
+                <li><strong>2. إذا فقدت غرضاً:</strong> ابحث في "قائمة المفقودات" أو ارفع بلاغاً.</li>
+                <li><strong>3. لحماية أغراضك:</strong> أنشئ ملصق QR خاص بك.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
 
