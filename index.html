@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خدمة مفقودات الكلية التقنية</title>
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- نظام الأيقونات الموحد -->
+<!-- SVG ICON SYSTEM -->
 <svg xmlns="http://www.w3.org/2000/svg"
      style="position:absolute;width:0;height:0;overflow:hidden"
      aria-hidden="true">
@@ -80,7 +78,7 @@
 
 </svg>
 
-<!-- NAV -->
+<!-- NAVIGATION -->
 <nav class="nav-glass">
 
     <img src="logo.png" class="nav-logo" alt="شعار منصة إيجاد">
@@ -97,7 +95,7 @@
 
     </div>
 
-    <!-- التنبيهات -->
+    <!-- NOTIFICATIONS -->
     <div id="notif-box" class="notif-box">
 
         <div class="notif-header">
@@ -122,26 +120,22 @@
 
     </div>
 
-    <!-- أزرار التنقل -->
+    <!-- NAV ICONS -->
     <div class="nav-icons">
 
-        <button class="nav-btn" onclick="location.href='info.html'"
-                aria-label="معلومات">
+        <button class="nav-btn" onclick="location.href='info.html'" aria-label="معلومات">
             <svg class="ui-icon"><use href="#i-info"></use></svg>
         </button>
 
-        <button class="nav-btn" onclick="location.href='help.html'"
-                aria-label="المساعدة">
+        <button class="nav-btn" onclick="location.href='help.html'" aria-label="المساعدة">
             <svg class="ui-icon"><use href="#i-help"></use></svg>
         </button>
 
-        <button class="nav-btn" id="btn-bell"
-                aria-label="التنبيهات">
+        <button class="nav-btn" id="btn-bell" aria-label="التنبيهات">
             <svg class="ui-icon"><use href="#i-bell"></use></svg>
         </button>
 
-        <button class="nav-btn" id="btn-menu"
-                aria-label="القائمة">
+        <button class="nav-btn" id="btn-menu" aria-label="القائمة">
             <svg class="ui-icon"><use href="#i-menu"></use></svg>
         </button>
 
@@ -149,7 +143,7 @@
 
 </nav>
 
-<!-- القائمة الجانبية -->
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-header">
@@ -168,7 +162,7 @@
 
 </aside>
 
-<!-- HEADER -->
+<!-- HERO -->
 <header class="hero">
 
     <div class="hero-layer"></div>
@@ -186,68 +180,53 @@
 <section class="services-list">
 
     <a href="new-item.html" class="service-card">
-
         <div class="icon-circle">
             <svg class="ui-icon"><use href="#i-add"></use></svg>
         </div>
-
         <div class="service-text">
             <h3>تسجيل غرض جديد</h3>
             <p>استخدم هذه الخدمة لتسجيل غرض جديد مفقود أو معثور عليه في النظام.</p>
         </div>
-
     </a>
 
     <a href="qr.html" class="service-card">
-
         <div class="icon-circle">
             <svg class="ui-icon"><use href="#i-qr"></use></svg>
         </div>
-
         <div class="service-text">
             <h3>إنشاء QR</h3>
             <p>إنشاء رمز QR مخصص ليسهل الوصول إلى بيانات الغرض بسرعة.</p>
         </div>
-
     </a>
 
     <a href="report.html" class="service-card">
-
         <div class="icon-circle">
             <svg class="ui-icon"><use href="#i-search"></use></svg>
         </div>
-
         <div class="service-text">
             <h3>الإبلاغ عن غرض مفقود</h3>
             <p>إرسال بلاغ عن غرض مفقود مع تفاصيل تساعد في العثور عليه.</p>
         </div>
-
     </a>
 
     <a href="lost-list.html" class="service-card">
-
         <div class="icon-circle">
             <svg class="ui-icon"><use href="#i-list"></use></svg>
         </div>
-
         <div class="service-text">
             <h3>قائمة المفقودات</h3>
             <p>عرض جميع الأغراض والبلاغات في النظام.</p>
         </div>
-
     </a>
 
     <a href="support.html" class="service-card">
-
         <div class="icon-circle">
             <svg class="ui-icon"><use href="#i-support"></use></svg>
         </div>
-
         <div class="service-text">
             <h3>الدعم الفني</h3>
             <p>تواصل مباشر مع فريق الدعم لحل أي مشكلة تواجهك.</p>
         </div>
-
     </a>
 
 </section>
