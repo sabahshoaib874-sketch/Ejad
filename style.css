@@ -629,3 +629,334 @@ body.dark-mode .notif-item:hover {
         color 0.3s ease,
         border-color 0.3s ease;
 }
+
+/* ==========================================
+   RESPONSIVE DESIGN - منصة إيجاد
+   جميع الأجهزة والشاشات
+========================================== */
+
+/* ضبط قياسات جميع العناصر */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+/* ==========================================
+   HEADER / NAVIGATION
+========================================== */
+
+.nav-glass {
+    width: calc(100% - 30px);
+    max-width: 100%;
+    margin: 15px auto;
+    padding: 12px 18px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.nav-logo {
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+}
+
+.nav-search-bar {
+    width: 230px;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.nav-btn {
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   HERO SECTION
+========================================== */
+
+.hero {
+    width: 100%;
+    min-height: 380px;
+    height: auto;
+    padding: 70px 20px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 15px;
+}
+
+.hero-content h1 {
+    font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.7;
+}
+
+.hero-content p {
+    font-size: clamp(15px, 2vw, 18px);
+    line-height: 1.8;
+}
+
+/* ==========================================
+   SERVICE CARDS
+========================================== */
+
+.services-list {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 45px 25px;
+}
+
+.service-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.service-text {
+    min-width: 0;
+}
+
+.service-text h3,
+.service-text p {
+    overflow-wrap: break-word;
+}
+
+/* ==========================================
+   TABLETS
+========================================== */
+
+@media (max-width: 768px) {
+
+    .nav-glass {
+        width: calc(100% - 24px);
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .nav-icons {
+        gap: 10px;
+    }
+
+    .nav-search-bar {
+        width: 200px;
+    }
+
+    .hero {
+        min-height: 350px;
+        padding: 65px 15px;
+    }
+
+    .services-list {
+        padding: 35px 18px;
+    }
+
+    .service-card {
+        gap: 18px;
+        padding: 20px;
+    }
+
+}
+
+/* ==========================================
+   MOBILE PHONES
+========================================== */
+
+@media (max-width: 600px) {
+
+    .nav-glass {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+        padding: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        border-radius: 20px;
+    }
+
+    /* الشعار */
+    .nav-logo {
+        max-width: 105px;
+        height: 45px;
+        object-fit: contain;
+    }
+
+    /* شريط البحث */
+    .nav-search-bar {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        flex: 1 0 100%;
+        padding: 10px 15px;
+    }
+
+    /* الأيقونات */
+    .nav-icons {
+        order: 2;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 7px;
+    }
+
+    .nav-btn {
+        padding: 7px;
+        flex-shrink: 0;
+    }
+
+    .nav-btn img {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* الهيدر */
+    .hero {
+        width: 100%;
+        min-height: 330px;
+        height: auto;
+        padding: 65px 15px;
+        background-position: center;
+    }
+
+    .hero-content {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 25px;
+        line-height: 1.7;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+        line-height: 1.9;
+    }
+
+    .scroll-bounce {
+        bottom: 15px;
+    }
+
+    /* بطاقات الخدمات */
+    .services-list {
+        width: 100%;
+        padding: 30px 12px;
+        gap: 18px;
+    }
+
+    .service-card {
+        width: 100%;
+        padding: 18px 14px;
+        gap: 14px;
+        border-radius: 20px;
+        transform: none;
+    }
+
+    .service-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .service-card .icon-circle {
+        width: 55px;
+        height: 55px;
+        min-width: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-circle img {
+        width: 35px;
+        height: 35px;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    .service-text h3 {
+        font-size: 19px;
+        line-height: 1.6;
+    }
+
+    .service-text p {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    /* صندوق التنبيهات */
+    .notif-box {
+        width: calc(100% - 30px);
+        max-width: 320px;
+        right: 15px;
+        top: 85px;
+    }
+
+    /* القائمة الجانبية */
+    .sidebar {
+        width: min(280px, 85vw);
+        right: -300px;
+    }
+
+}
+
+/* ==========================================
+   SMALL MOBILE PHONES
+========================================== */
+
+@media (max-width: 380px) {
+
+    .nav-icons {
+        gap: 4px;
+    }
+
+    .nav-btn {
+        padding: 6px;
+    }
+
+    .nav-btn img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .service-card {
+        gap: 10px;
+        padding: 15px 10px;
+    }
+
+    .service-card .icon-circle {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+    }
+
+    .service-text h3 {
+        font-size: 17px;
+    }
+
+    .service-text p {
+        font-size: 13px;
+    }
+
+}
+
