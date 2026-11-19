@@ -1,102 +1,226 @@
 
-/* =================================
-   GLOBAL
-================================= */
+/* =========================================
+   منصة إيجاد الرقمية - GLOBAL
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
 
 body {
+    width: 100%;
+    max-width: 100%;
     margin: 0;
+    padding: 0;
+    overflow-x: hidden;
     background: #eef3f8;
     font-family: 'Cairo', sans-serif;
+    color: #0F4C81;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
+button,
+input {
+    font-family: inherit;
+}
 
-/* =================================
-   NAV GLASS STYLE
-================================= */
+img,
+svg {
+    max-width: 100%;
+}
+
+/* =========================================
+   NAVIGATION - GLASS HEADER
+========================================= */
 
 .nav-glass {
-    width: 95%;
+    width: calc(100% - 40px);
+    max-width: 1500px;
+    min-height: 100px;
     margin: 15px auto;
     padding: 12px 25px;
-    box-sizing: border-box;
 
-    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
 
-    border-radius: 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 28px;
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.10);
-
-    gap: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
-
-
-/* NAV ICONS */
-
-.nav-icons {
-    display: flex;
-    gap: 18px;
-}
-
-
-/* ICON BUTTONS */
-
-.nav-btn {
-    background: rgba(255,255,255,0.35);
-    border: none;
-    padding: 8px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.25s;
-    backdrop-filter: blur(6px);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-btn:hover {
-    transform: scale(1.1);
-    background: rgba(255,255,255,0.55);
-}
-
 
 /* LOGO */
 
 .nav-logo {
+    width: 120px;
     height: 70px;
-    width: 95px;
     object-fit: contain;
     display: block;
+    flex-shrink: 0;
 }
 
+/* =========================================
+   NAV ICONS
+========================================= */
 
-/* =================================
-   HERO
-================================= */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.nav-btn {
+    width: 45px;
+    height: 45px;
+    padding: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,0.40);
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    transition: 0.25s ease;
+}
+
+.nav-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.75);
+}
+
+/* =========================================
+   SVG ICON SYSTEM
+========================================= */
+
+.ui-icon {
+    width: 24px;
+    height: 24px;
+
+    display: block;
+    flex-shrink: 0;
+
+    fill: none;
+    stroke: #0F4C81;
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.nav-btn .ui-icon {
+    width: 23px;
+    height: 23px;
+}
+
+button .ui-icon {
+    pointer-events: none;
+}
+
+/* =========================================
+   SEARCH BAR
+========================================= */
+
+.nav-search-bar {
+    width: 280px;
+    max-width: 100%;
+    min-width: 0;
+    flex-shrink: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 18px;
+
+    background: rgba(255,255,255,0.35);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 35px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.nav-search-bar input {
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    color: #0F4C81;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.nav-search-bar input::placeholder {
+    color: #0F4C81;
+    opacity: 0.6;
+}
+
+.nav-search-bar .ui-icon {
+    width: 23px;
+    height: 23px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: 0.2s;
+}
+
+.nav-search-bar .ui-icon:hover {
+    transform: scale(1.15);
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
 
 .hero {
-    height: 380px;
     position: relative;
 
-    background-image: url('building.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 380px;
+    height: 380px;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-image: url('building.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
 }
 
 .hero-layer {
     position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
 
@@ -106,33 +230,46 @@ body {
     );
 
     backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
 }
 
 .hero-content {
-    color: white;
     position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 1000px;
+
+    padding: 20px;
+
+    color: white;
     text-align: center;
-    padding: 0 20px;
 }
 
 .hero-content h1 {
-    font-size: 34px;
-    margin-bottom: 10px;
+    margin: 0 0 15px;
+    font-size: clamp(25px, 4vw, 42px);
+    line-height: 1.7;
 }
 
 .hero-content p {
-    font-size: 18px;
-    opacity: 0.9;
+    margin: 0;
+    font-size: clamp(15px, 2vw, 20px);
+    line-height: 1.9;
+    opacity: 0.95;
 }
 
-
-/* SCROLL ICON */
+/* =========================================
+   SCROLL ICON
+========================================= */
 
 .scroll-bounce {
     position: absolute;
     bottom: 25px;
-    font-size: 26px;
+
     color: white;
+    font-size: 26px;
+
     animation: bounce 1.4s infinite;
 }
 
@@ -146,70 +283,76 @@ body {
     }
 }
 
-
-/* =================================
+/* =========================================
    GRID
-================================= */
+========================================= */
 
 .grid {
-    padding: 60px 25px;
+    width: 100%;
+    padding: 50px 25px;
+
     display: grid;
-    gap: 25px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
 }
 
-
-/* =================================
-   SERVICES
-================================= */
+/* =========================================
+   SERVICES LIST
+========================================= */
 
 .services-list {
+    width: 100%;
+    max-width: 1150px;
+
+    margin: 0 auto;
     padding: 50px 25px;
+
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-
-/* PREMIUM GLASS CARD */
+/* =========================================
+   PREMIUM GLASS CARDS
+========================================= */
 
 .service-card {
-    background: rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    width: 100%;
+    min-width: 0;
 
-    border: 1px solid rgba(255,255,255,0.40);
-    border-radius: 22px;
+    padding: 22px;
 
     display: flex;
     align-items: center;
     gap: 22px;
-    padding: 22px;
+
+    background: rgba(255,255,255,0.38);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.65);
+    border-radius: 25px;
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,0.12),
-        inset 0 0 25px rgba(255,255,255,0.35),
-        inset 0 15px 25px rgba(255,255,255,0.20);
+        0 8px 25px rgba(0,0,0,0.09),
+        inset 0 0 25px rgba(255,255,255,0.35);
 
-    transition: 0.35s ease;
-    cursor: pointer;
     text-decoration: none;
+    cursor: pointer;
+
+    transition: 0.3s ease;
 }
-
-
-/* HOVER */
 
 .service-card:hover {
-    transform: translateY(-6px) scale(1.03);
+    transform: translateY(-5px);
 
-    background: rgba(255, 255, 255, 0.30);
+    background: rgba(255,255,255,0.60);
 
     box-shadow:
-        0 20px 40px rgba(0,0,0,0.15),
-        inset 0 0 25px rgba(255,255,255,0.4),
-        inset 0 20px 30px rgba(255,255,255,0.25);
+        0 15px 35px rgba(0,0,0,0.12),
+        inset 0 0 25px rgba(255,255,255,0.45);
 }
-
 
 /* SERVICE ICON */
 
@@ -221,102 +364,76 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-.icon-circle:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 15px rgba(15, 76, 129, 0.35);
     transition: 0.25s ease;
 }
 
+.service-card .icon-circle img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
 
-/* TEXT */
+.service-card .icon-circle .ui-icon {
+    width: 38px;
+    height: 38px;
+}
+
+.service-card:hover .icon-circle {
+    transform: scale(1.08);
+}
+
+/* SERVICE TEXT */
+
+.service-text {
+    min-width: 0;
+    flex: 1;
+}
 
 .service-text h3 {
     margin: 0;
-    font-size: 22px;
     color: #0F4C81;
+    font-size: 22px;
+    line-height: 1.6;
 }
 
 .service-text p {
     margin: 5px 0 0;
-    font-size: 15px;
     color: #0F4C81;
     opacity: 0.8;
-}
-
-
-/* =================================
-   SEARCH BAR
-================================= */
-
-.nav-search-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    background: rgba(255, 255, 255, 0.25);
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    padding: 10px 18px;
-    border-radius: 30px;
-
-    border: 1px solid rgba(255, 255, 255, 0.30);
-
-    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
-
-    flex-shrink: 0;
-    width: 230px;
-}
-
-.nav-search-bar input {
-    border: none;
-    background: transparent;
-    outline: none;
-
-    width: 100%;
-
     font-size: 15px;
-    font-family: inherit;
-    color: #0F4C81;
+    line-height: 1.8;
 }
 
-.nav-search-bar input::placeholder {
-    color: #0F4C81;
-    opacity: 0.55;
-}
-
-
-/* =================================
+/* =========================================
    SIDEBAR
-================================= */
+========================================= */
 
 .sidebar {
     position: fixed;
     top: 0;
-    right: -260px;
+    right: -300px;
 
-    width: 260px;
+    width: 280px;
+    max-width: 85vw;
     height: 100%;
     box-sizing: border-box;
 
-    background: rgba(255,255,255,0.22);
+    padding-top: 20px;
+
+    background: rgba(255,255,255,0.85);
 
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
 
-    padding-top: 20px;
-
-    transition: 0.4s ease;
+    border-left: 1px solid rgba(255,255,255,0.4);
 
     box-shadow: -5px 0 20px rgba(0,0,0,0.15);
 
-    border-left: 1px solid rgba(255,255,255,0.3);
-
-    z-index: 99999;
     overflow-y: auto;
+    z-index: 99999;
+
+    transition: right 0.35s ease;
 }
 
 .sidebar.open {
@@ -324,17 +441,18 @@ body {
 }
 
 .sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 0 18px;
 
-    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     color: #0F4C81;
 }
 
 .sidebar-header span {
-    cursor: pointer;
     font-size: 26px;
+    cursor: pointer;
 }
 
 .sidebar a {
@@ -342,48 +460,45 @@ body {
 
     padding: 14px 20px;
 
-    text-decoration: none;
     color: #0F4C81;
+    font-size: 17px;
+    text-decoration: none;
 
-    font-size: 18px;
-
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
 
     transition: 0.25s;
 }
 
 .sidebar a:hover {
-    background: rgba(255,255,255,0.35);
     padding-right: 30px;
+    background: rgba(255,255,255,0.45);
 }
 
-
-/* =================================
+/* =========================================
    NOTIFICATIONS
-================================= */
+========================================= */
 
 .notif-box {
     position: fixed;
-    top: 90px;
+    top: 100px;
     right: 25px;
 
-    width: 280px;
-    box-sizing: border-box;
-
-    background: rgba(255,255,255,0.22);
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    border: 1px solid rgba(255,255,255,0.35);
-
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-
-    border-radius: 18px;
+    width: 300px;
+    max-width: calc(100vw - 30px);
 
     padding: 15px;
 
     display: none;
+
+    background: rgba(255,255,255,0.78);
+
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 20px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
 
     z-index: 999999;
 
@@ -404,95 +519,43 @@ body {
 
 .notif-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
     margin-bottom: 12px;
 }
 
 .notif-header h3 {
     margin: 0;
-    font-size: 20px;
     color: #0F4C81;
+    font-size: 20px;
 }
 
 .notif-header span {
+    color: #0F4C81;
     font-size: 22px;
     cursor: pointer;
-    color: #0F4C81;
 }
 
 .notif-item {
-    background: rgba(255,255,255,0.28);
-
-    padding: 10px;
-    border-radius: 12px;
-
-    margin-bottom: 10px;
-
-    font-size: 15px;
-    color: #0F4C81;
-
     display: flex;
     align-items: center;
     gap: 10px;
+
+    padding: 12px;
+    margin-bottom: 10px;
+
+    color: #0F4C81;
+    font-size: 14px;
+
+    background: rgba(255,255,255,0.45);
+    border-radius: 12px;
 
     transition: 0.25s;
 }
 
 .notif-item:hover {
-    background: rgba(255,255,255,0.45);
-    transform: scale(1.03);
-}
-
-
-/* =================================
-   UNIFIED SVG ICON SYSTEM
-================================= */
-
-.ui-icon {
-    width: 24px;
-    height: 24px;
-
-    display: block;
-    flex-shrink: 0;
-
-    fill: none;
-
-    stroke: #0F4C81;
-    stroke-width: 1.8;
-
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.nav-btn .ui-icon {
-    width: 22px;
-    height: 22px;
-}
-
-.nav-search-bar .ui-icon {
-    width: 22px;
-    height: 22px;
-
-    cursor: pointer;
-
-    transition: 0.2s ease;
-}
-
-.nav-search-bar .ui-icon:hover {
-    transform: scale(1.15);
-}
-
-.service-card .icon-circle .ui-icon {
-    width: 38px;
-    height: 38px;
-
-    transition: 0.25s ease;
-}
-
-.service-card:hover .icon-circle .ui-icon {
-    transform: scale(1.12);
+    background: rgba(255,255,255,0.7);
 }
 
 .notif-item .ui-icon {
@@ -500,49 +563,44 @@ body {
     height: 21px;
 }
 
-button .ui-icon {
-    pointer-events: none;
-}
-
-
-/* =================================
+/* =========================================
    SEARCH RESULTS
-================================= */
+========================================= */
 
 .service-card.search-hidden {
     display: none;
 }
 
-
-/* =================================
+/* =========================================
    DARK MODE
-================================= */
+========================================= */
 
 body.dark-mode {
     background: #101923;
-    color: #f1f5f9;
+    color: #e2edf8;
 }
-
 
 /* NAV */
 
 body.dark-mode .nav-glass {
-    background: rgba(18, 30, 46, 0.72);
-    border-color: rgba(255,255,255,0.14);
+    background: rgba(18,30,46,0.85);
+    border-color: rgba(255,255,255,0.15);
 }
 
 body.dark-mode .nav-btn {
     background: rgba(255,255,255,0.10);
+    border-color: rgba(255,255,255,0.12);
 }
 
 body.dark-mode .nav-btn:hover {
     background: rgba(255,255,255,0.20);
 }
 
+/* ICONS */
+
 body.dark-mode .ui-icon {
     stroke: #e2edf8;
 }
-
 
 /* SEARCH */
 
@@ -556,20 +614,15 @@ body.dark-mode .nav-search-bar input::placeholder {
     color: #e2edf8;
 }
 
-
-/* SERVICE CARDS */
+/* CARDS */
 
 body.dark-mode .service-card {
-    background: rgba(25, 43, 63, 0.78);
-    border-color: rgba(255,255,255,0.15);
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,0.25),
-        inset 0 0 25px rgba(255,255,255,0.04);
+    background: rgba(25,43,63,0.85);
+    border-color: rgba(255,255,255,0.13);
 }
 
 body.dark-mode .service-card:hover {
-    background: rgba(35, 58, 82, 0.88);
+    background: rgba(35,58,82,0.95);
 }
 
 body.dark-mode .service-text h3,
@@ -577,11 +630,10 @@ body.dark-mode .service-text p {
     color: #e2edf8;
 }
 
-
 /* SIDEBAR */
 
 body.dark-mode .sidebar {
-    background: rgba(15, 29, 45, 0.96);
+    background: rgba(15,29,45,0.97);
     border-color: rgba(255,255,255,0.15);
 }
 
@@ -594,11 +646,10 @@ body.dark-mode .sidebar a:hover {
     background: rgba(255,255,255,0.12);
 }
 
-
 /* NOTIFICATIONS */
 
 body.dark-mode .notif-box {
-    background: rgba(18, 30, 46, 0.97);
+    background: rgba(18,30,46,0.97);
     border-color: rgba(255,255,255,0.15);
 }
 
@@ -612,351 +663,297 @@ body.dark-mode .notif-item {
     background: rgba(255,255,255,0.08);
 }
 
-body.dark-mode .notif-item:hover {
-    background: rgba(255,255,255,0.15);
-}
-
-
-/* THEME TRANSITIONS */
-
-.nav-glass,
-.service-card,
-.sidebar,
-.notif-box,
-.nav-search-bar {
-    transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
-}
-
-/* ==========================================
-   RESPONSIVE DESIGN - منصة إيجاد
-   جميع الأجهزة والشاشات
-========================================== */
-
-/* ضبط قياسات جميع العناصر */
-* {
-    box-sizing: border-box;
-}
-
-html {
-    width: 100%;
-    overflow-x: hidden;
-}
-
-body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    margin: 0;
-}
-
-/* ==========================================
-   HEADER / NAVIGATION
-========================================== */
-
-.nav-glass {
-    width: calc(100% - 30px);
-    max-width: 100%;
-    margin: 15px auto;
-    padding: 12px 18px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.nav-logo {
-    max-width: 120px;
-    height: auto;
-    object-fit: contain;
-}
-
-.nav-search-bar {
-    width: 230px;
-    max-width: 100%;
-    min-width: 0;
-}
-
-.nav-icons {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.nav-btn {
-    flex-shrink: 0;
-}
-
-/* ==========================================
-   HERO SECTION
-========================================== */
-
-.hero {
-    width: 100%;
-    min-height: 380px;
-    height: auto;
-    padding: 70px 20px;
-    background-position: center center;
-    background-size: cover;
-}
-
-.hero-content {
-    width: 100%;
-    max-width: 900px;
-    padding: 0 15px;
-}
-
-.hero-content h1 {
-    font-size: clamp(24px, 4vw, 34px);
-    line-height: 1.7;
-}
-
-.hero-content p {
-    font-size: clamp(15px, 2vw, 18px);
-    line-height: 1.8;
-}
-
-/* ==========================================
-   SERVICE CARDS
-========================================== */
-
-.services-list {
-    width: 100%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 45px 25px;
-}
-
-.service-card {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-}
-
-.service-text {
-    min-width: 0;
-}
-
-.service-text h3,
-.service-text p {
-    overflow-wrap: break-word;
-}
-
-/* ==========================================
+/* =========================================
    TABLETS
-========================================== */
+========================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
     .nav-glass {
-        width: calc(100% - 24px);
-        padding: 12px;
-        gap: 12px;
-    }
-
-    .nav-icons {
+        width: calc(100% - 25px);
+        padding: 12px 15px;
         gap: 10px;
     }
 
+    .nav-icons {
+        gap: 8px;
+    }
+
+    .nav-btn {
+        width: 42px;
+        height: 42px;
+    }
+
+    .nav-logo {
+        width: 100px;
+    }
+
     .nav-search-bar {
-        width: 200px;
+        width: 220px;
     }
 
     .hero {
         min-height: 350px;
-        padding: 65px 15px;
     }
 
     .services-list {
-        padding: 35px 18px;
+        padding: 40px 20px;
     }
-
-    .service-card {
-        gap: 18px;
-        padding: 20px;
-    }
-
 }
 
-/* ==========================================
+/* =========================================
    MOBILE PHONES
-========================================== */
+========================================= */
 
 @media (max-width: 600px) {
 
+    /* HEADER */
+
     .nav-glass {
         width: calc(100% - 20px);
+        min-height: auto;
+
         margin: 10px auto;
         padding: 12px;
+
         display: flex;
+        flex-direction: row;
         flex-wrap: wrap;
+
         justify-content: space-between;
+        align-items: center;
+
         gap: 12px;
-        border-radius: 20px;
+
+        border-radius: 22px;
     }
 
-    /* الشعار */
+    /* LOGO */
+
     .nav-logo {
-        max-width: 105px;
+        order: 1;
+
+        width: 85px;
         height: 45px;
+
         object-fit: contain;
     }
 
-    /* شريط البحث */
-    .nav-search-bar {
-        order: 3;
-        width: 100%;
-        max-width: 100%;
-        flex: 1 0 100%;
-        padding: 10px 15px;
-    }
+    /* ICONS */
 
-    /* الأيقونات */
     .nav-icons {
         order: 2;
+
         display: flex;
         flex-wrap: nowrap;
+
+        align-items: center;
         justify-content: center;
-        gap: 7px;
+
+        gap: 5px;
     }
 
     .nav-btn {
+        width: 36px;
+        height: 36px;
         padding: 7px;
-        flex-shrink: 0;
     }
 
-    .nav-btn img {
-        width: 20px;
-        height: 20px;
+    .nav-btn .ui-icon {
+        width: 21px;
+        height: 21px;
     }
 
-    /* الهيدر */
+    /* SEARCH */
+
+    .nav-search-bar {
+        order: 3;
+
+        width: 100%;
+        max-width: 100%;
+        flex: 1 0 100%;
+
+        padding: 10px 15px;
+    }
+
+    .nav-search-bar input {
+        font-size: 14px;
+    }
+
+    /* HERO */
+
     .hero {
         width: 100%;
         min-height: 330px;
         height: auto;
-        padding: 65px 15px;
-        background-position: center;
+
+        padding: 60px 12px;
+
+        background-position: center center;
     }
 
     .hero-content {
         width: 100%;
-        padding: 0 10px;
+        padding: 10px;
     }
 
     .hero-content h1 {
         font-size: 25px;
-        line-height: 1.7;
+        line-height: 1.8;
     }
 
     .hero-content p {
-        font-size: 15px;
+        font-size: 14px;
         line-height: 1.9;
     }
 
     .scroll-bounce {
         bottom: 15px;
+        font-size: 22px;
     }
 
-    /* بطاقات الخدمات */
+    /* SERVICES */
+
     .services-list {
         width: 100%;
         padding: 30px 12px;
-        gap: 18px;
+        gap: 17px;
     }
 
     .service-card {
         width: 100%;
-        padding: 18px 14px;
-        gap: 14px;
+        padding: 17px 13px;
+
+        gap: 12px;
+
         border-radius: 20px;
-        transform: none;
-    }
-
-    .service-card:hover {
-        transform: translateY(-3px);
     }
 
     .service-card .icon-circle {
-        width: 55px;
-        height: 55px;
-        min-width: 55px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 52px;
+        height: 52px;
+        min-width: 52px;
     }
 
-    .icon-circle img {
-        width: 35px;
-        height: 35px;
-        max-width: 100%;
-        object-fit: contain;
+    .service-card .icon-circle img,
+    .service-card .icon-circle .ui-icon {
+        width: 32px;
+        height: 32px;
     }
 
     .service-text h3 {
-        font-size: 19px;
-        line-height: 1.6;
-    }
-
-    .service-text p {
-        font-size: 14px;
-        line-height: 1.8;
-    }
-
-    /* صندوق التنبيهات */
-    .notif-box {
-        width: calc(100% - 30px);
-        max-width: 320px;
-        right: 15px;
-        top: 85px;
-    }
-
-    /* القائمة الجانبية */
-    .sidebar {
-        width: min(280px, 85vw);
-        right: -300px;
-    }
-
-}
-
-/* ==========================================
-   SMALL MOBILE PHONES
-========================================== */
-
-@media (max-width: 380px) {
-
-    .nav-icons {
-        gap: 4px;
-    }
-
-    .nav-btn {
-        padding: 6px;
-    }
-
-    .nav-btn img {
-        width: 18px;
-        height: 18px;
-    }
-
-    .service-card {
-        gap: 10px;
-        padding: 15px 10px;
-    }
-
-    .service-card .icon-circle {
-        width: 48px;
-        height: 48px;
-        min-width: 48px;
-    }
-
-    .service-text h3 {
-        font-size: 17px;
+        font-size: 18px;
+        line-height: 1.7;
     }
 
     .service-text p {
         font-size: 13px;
+        line-height: 1.8;
+    }
+
+    /* NOTIFICATIONS */
+
+    .notif-box {
+        top: 115px;
+        right: 10px;
+
+        width: calc(100% - 20px);
+        max-width: 330px;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: min(280px, 85vw);
     }
 
 }
 
+/* =========================================
+   SMALL MOBILE PHONES
+========================================= */
+
+@media (max-width: 380px) {
+
+    .nav-glass {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .nav-logo {
+        width: 70px;
+        height: 40px;
+    }
+
+    .nav-icons {
+        gap: 3px;
+    }
+
+    .nav-btn {
+        width: 33px;
+        height: 33px;
+        padding: 6px;
+    }
+
+    .nav-btn .ui-icon {
+        width: 19px;
+        height: 19px;
+    }
+
+    .hero-content h1 {
+        font-size: 22px;
+    }
+
+    .service-card {
+        padding: 14px 10px;
+        gap: 9px;
+    }
+
+    .service-card .icon-circle {
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+    }
+
+    .service-text h3 {
+        font-size: 16px;
+    }
+
+    .service-text p {
+        font-size: 12px;
+    }
+}
+
+/* =========================================
+   LARGE SCREENS
+========================================= */
+
+@media (min-width: 1200px) {
+
+    .nav-glass {
+        padding: 15px 35px;
+    }
+
+    .hero {
+        height: 450px;
+    }
+
+    .services-list {
+        max-width: 1200px;
+    }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
