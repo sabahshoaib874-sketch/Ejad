@@ -1,28 +1,21 @@
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#eef3f8">
 
     <title>منصة إيجاد الرقمية بالكلية التقنية بالطائف</title>
-
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =================================
-     SVG ICON SYSTEM
-================================= -->
-
+<!-- SVG ICON SYSTEM -->
 <svg xmlns="http://www.w3.org/2000/svg"
-     style="position:absolute;width:0;height:0;overflow:hidden"
-     aria-hidden="true">
+     class="svg-library" aria-hidden="true">
 
     <symbol id="i-search" viewBox="0 0 24 24">
         <circle cx="10.8" cy="10.8" r="6.8"/>
@@ -94,146 +87,98 @@
 
 </svg>
 
-
-<!-- =================================
-     NAVIGATION
-================================= -->
-
+<!-- NAVIGATION -->
 <nav class="nav-glass">
 
-    <img
-        src="logo.png"
-        class="nav-logo"
-        alt="شعار منصة إيجاد الرقمية"
-    >
+    <img src="logo.png"
+         class="nav-logo"
+         alt="شعار منصة إيجاد">
 
-    <!-- SEARCH -->
     <div class="nav-search-bar">
 
-        <svg
-            class="nav-search-icon ui-icon"
-            role="button"
-            tabindex="0"
-            aria-label="بحث"
-        >
-            <use href="#i-search"></use>
-        </svg>
+        <button class="search-action" id="search-button"
+                aria-label="بحث" type="button">
+            <svg class="ui-icon">
+                <use href="#i-search"></use>
+            </svg>
+        </button>
 
-        <input
-            type="text"
-            placeholder="ابحث هنا..."
-            id="site-search"
-        >
+        <input type="search"
+               placeholder="ابحث هنا..."
+               id="site-search">
 
     </div>
-
 
     <!-- NOTIFICATIONS -->
     <div id="notif-box" class="notif-box">
 
         <div class="notif-header">
             <h3>التنبيهات</h3>
-            <span id="close-notif">&times;</span>
+            <button id="close-notif" type="button"
+                    aria-label="إغلاق">&times;</button>
         </div>
 
         <div class="notif-item">
-            <svg class="ui-icon">
-                <use href="#i-bell"></use>
-            </svg>
+            <svg class="ui-icon"><use href="#i-bell"/></svg>
             تم إضافة غرض جديد في قائمة المفقودات.
         </div>
 
         <div class="notif-item">
-            <svg class="ui-icon">
-                <use href="#i-package"></use>
-            </svg>
+            <svg class="ui-icon"><use href="#i-package"/></svg>
             تم العثور على غرض مطابق لبلاغك.
         </div>
 
         <div class="notif-item">
-            <svg class="ui-icon">
-                <use href="#i-star"></use>
-            </svg>
+            <svg class="ui-icon"><use href="#i-star"/></svg>
             لا توجد تنبيهات جديدة حالياً.
         </div>
 
     </div>
 
-
     <!-- NAV ICONS -->
     <div class="nav-icons">
 
-        <button
-            class="nav-btn"
-            onclick="location.href='info.html'"
-            aria-label="معلومات"
-        >
+        <button class="nav-btn"
+                onclick="location.href='info.html'"
+                aria-label="معلومات">
+            <svg class="ui-icon"><use href="#i-info"/></svg>
+        </button>
+
+        <button class="nav-btn"
+                onclick="location.href='help.html'"
+                aria-label="المساعدة">
+            <svg class="ui-icon"><use href="#i-help"/></svg>
+        </button>
+
+        <button class="nav-btn" id="btn-bell"
+                aria-label="التنبيهات">
+            <svg class="ui-icon"><use href="#i-bell"/></svg>
+        </button>
+
+        <button class="nav-btn" id="theme-toggle"
+                aria-label="تفعيل الوضع الليلي"
+                title="تفعيل الوضع الليلي">
             <svg class="ui-icon">
-                <use href="#i-info"></use>
+                <use id="theme-icon" href="#i-moon"/>
             </svg>
         </button>
 
-
-        <button
-            class="nav-btn"
-            onclick="location.href='help.html'"
-            aria-label="المساعدة"
-        >
-            <svg class="ui-icon">
-                <use href="#i-help"></use>
-            </svg>
-        </button>
-
-
-        <button
-            class="nav-btn"
-            id="btn-bell"
-            aria-label="التنبيهات"
-        >
-            <svg class="ui-icon">
-                <use href="#i-bell"></use>
-            </svg>
-        </button>
-
-
-        <!-- LIGHT / DARK MODE -->
-        <button
-            class="nav-btn"
-            id="theme-toggle"
-            aria-label="تغيير الإضاءة"
-            title="تغيير الإضاءة"
-        >
-            <svg class="ui-icon">
-                <use id="theme-icon" href="#i-moon"></use>
-            </svg>
-        </button>
-
-
-        <!-- MENU -->
-        <button
-            class="nav-btn"
-            id="btn-menu"
-            aria-label="القائمة"
-        >
-            <svg class="ui-icon">
-                <use href="#i-menu"></use>
-            </svg>
+        <button class="nav-btn" id="btn-menu"
+                aria-label="القائمة">
+            <svg class="ui-icon"><use href="#i-menu"/></svg>
         </button>
 
     </div>
 
 </nav>
 
-
-<!-- =================================
-     SIDEBAR
-================================= -->
-
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-header">
         <h3>منصة إيجاد الرقمية</h3>
-        <span id="closeSidebar">&times;</span>
+        <button id="closeSidebar" type="button"
+                aria-label="إغلاق">&times;</button>
     </div>
 
     <a href="index.html">الرئيسية</a>
@@ -247,11 +192,7 @@
 
 </aside>
 
-
-<!-- =================================
-     HERO HEADER
-================================= -->
-
+<!-- HERO -->
 <header class="hero">
 
     <div class="hero-layer"></div>
@@ -271,119 +212,75 @@
 
 </header>
 
-
-<!-- =================================
-     SERVICES
-================================= -->
-
+<!-- SERVICES -->
 <section class="services-list">
 
-
-    <!-- ADD ITEM -->
     <a href="new-item.html" class="service-card">
 
         <div class="icon-circle">
-            <svg class="ui-icon">
-                <use href="#i-add"></use>
-            </svg>
+            <svg class="ui-icon"><use href="#i-add"/></svg>
         </div>
 
         <div class="service-text">
             <h3>تسجيل غرض جديد</h3>
-
-            <p>
-                استخدم هذه الخدمة لتسجيل غرض جديد
-                مفقود أو معثور عليه في النظام.
-            </p>
+            <p>استخدم هذه الخدمة لتسجيل غرض جديد مفقود أو معثور عليه في النظام.</p>
         </div>
 
     </a>
 
-
-    <!-- QR -->
     <a href="qr.html" class="service-card">
 
         <div class="icon-circle">
-            <svg class="ui-icon">
-                <use href="#i-qr"></use>
-            </svg>
+            <svg class="ui-icon"><use href="#i-qr"/></svg>
         </div>
 
         <div class="service-text">
             <h3>إنشاء QR</h3>
-
-            <p>
-                إنشاء رمز QR مخصص ليسهل الوصول
-                إلى بيانات الغرض بسرعة.
-            </p>
+            <p>إنشاء رمز QR مخصص ليسهل الوصول إلى بيانات الغرض بسرعة.</p>
         </div>
 
     </a>
 
-
-    <!-- REPORT -->
     <a href="report.html" class="service-card">
 
         <div class="icon-circle">
-            <svg class="ui-icon">
-                <use href="#i-search"></use>
-            </svg>
+            <svg class="ui-icon"><use href="#i-search"/></svg>
         </div>
 
         <div class="service-text">
             <h3>الإبلاغ عن غرض مفقود</h3>
-
-            <p>
-                إرسال بلاغ عن غرض مفقود مع تفاصيل
-                تساعد في العثور عليه.
-            </p>
+            <p>إرسال بلاغ عن غرض مفقود مع تفاصيل تساعد في العثور عليه.</p>
         </div>
 
     </a>
 
-
-    <!-- LOST LIST -->
     <a href="lost-list.html" class="service-card">
 
         <div class="icon-circle">
-            <svg class="ui-icon">
-                <use href="#i-list"></use>
-            </svg>
+            <svg class="ui-icon"><use href="#i-list"/></svg>
         </div>
 
         <div class="service-text">
             <h3>قائمة المفقودات</h3>
-
-            <p>
-                عرض جميع الأغراض والبلاغات في النظام.
-            </p>
+            <p>عرض جميع الأغراض والبلاغات في النظام.</p>
         </div>
 
     </a>
 
-
-    <!-- SUPPORT -->
     <a href="support.html" class="service-card">
 
         <div class="icon-circle">
-            <svg class="ui-icon">
-                <use href="#i-support"></use>
-            </svg>
+            <svg class="ui-icon"><use href="#i-support"/></svg>
         </div>
 
         <div class="service-text">
             <h3>الدعم الفني</h3>
-
-            <p>
-                تواصل مباشر مع فريق الدعم
-                لحل أي مشكلة تواجهك.
-            </p>
+            <p>تواصل مباشر مع فريق الدعم لحل أي مشكلة تواجهك.</p>
         </div>
 
     </a>
 
 </section>
-
 
 <script src="script.js"></script>
 
