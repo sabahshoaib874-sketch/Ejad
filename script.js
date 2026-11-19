@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeNotif = document.getElementById("close-notif");
 
     const searchInput = document.getElementById("site-search");
-    const searchIcon = document.querySelector(".nav-search-icon");
+    const searchButton = document.getElementById("search-button");
 
     const serviceCards = document.querySelectorAll(".service-card");
 
@@ -27,12 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ================================= */
 
     function openSidebar() {
-        if (sidebar) {
-            sidebar.classList.add("open");
-        }
+        if (!sidebar) return;
+
+        sidebar.classList.add("open");
 
         if (notifBox) {
-            notifBox.style.display = "none";
+            notifBox.classList.remove("show");
         }
     }
 
@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (menuBtn && sidebar) {
 
         menuBtn.addEventListener("click", function (e) {
-
             e.stopPropagation();
 
             if (sidebar.classList.contains("open")) {
@@ -53,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 openSidebar();
             }
-
         });
 
         if (closeSidebar) {
@@ -65,14 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         document.addEventListener("click", function (e) {
-
             if (
                 !sidebar.contains(e.target) &&
                 !menuBtn.contains(e.target)
             ) {
                 hideSidebar();
             }
-
         });
     }
 
@@ -87,14 +83,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             e.stopPropagation();
 
-            const isOpen =
-                notifBox.style.display === "block";
+            const isOpen = notifBox.classList.contains("show");
 
-            notifBox.style.display =
-                isOpen ? "none" : "block";
+            notifBox.classList.toggle("show", !isOpen);
 
             hideSidebar();
-
         });
 
         notifBox.addEventListener("click", function (e) {
@@ -102,22 +95,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (closeNotif) {
-
             closeNotif.addEventListener("click", function () {
-                notifBox.style.display = "none";
+                notifBox.classList.remove("show");
             });
-
         }
 
         document.addEventListener("click", function (e) {
-
             if (
                 !notifBox.contains(e.target) &&
                 !bellBtn.contains(e.target)
             ) {
-                notifBox.style.display = "none";
+                notifBox.classList.remove("show");
             }
-
         });
     }
 
@@ -130,15 +119,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!searchInput) return;
 
-        const searchValue =
-            searchInput.value.trim().toLowerCase();
+        const searchValue = searchInput.value.trim().toLowerCase();
 
-        if (searchValue === "") {
-
-            serviceCards.forEach(function (card) {
-                card.classList.remove("search-hidden");
-            });
-
+        if (serviceCards.length === 0) {
+            if (searchValue !== "") {
+                alert("البحث في هذه الصفحة غير متاح حالياً.");
+            }
             return;
         }
 
@@ -146,50 +132,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
         serviceCards.forEach(function (card) {
 
-            const content =
-                card.textContent.toLowerCase();
+            const content = card.textContent.toLowerCase();
 
-            if (content.includes(searchValue)) {
+            const matches = content.includes(searchValue);
 
-                card.classList.remove("search-hidden");
-                found++;
+            card.classList.toggle(
+                "search-hidden",
+                searchValue !== "" && !matches
+            );
 
-            } else {
-
-                card.classList.add("search-hidden");
-
-            }
-
+            if (matches) found++;
         });
 
-        if (found === 0) {
+        if (searchValue !== "" && found === 0) {
             alert("لم يتم العثور على نتائج مطابقة.");
         }
-
     }
 
+    if (searchButton && searchInput) {
 
-    if (searchIcon && searchInput) {
-
-        searchIcon.addEventListener("click", performSearch);
-
-        searchIcon.addEventListener("keydown", function (e) {
-
-            if (e.key === "Enter" || e.key === " ") {
-
-                e.preventDefault();
-                performSearch();
-
-            }
-
-        });
+        searchButton.addEventListener("click", performSearch);
 
         searchInput.addEventListener("keydown", function (e) {
-
             if (e.key === "Enter") {
                 performSearch();
             }
-
         });
 
         searchInput.addEventListener("input", function () {
@@ -200,10 +167,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     card.classList.remove("search-hidden");
                 });
 
+            } else {
+                performSearch();
             }
-
         });
-
     }
 
 
@@ -213,38 +180,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function applyTheme(theme) {
 
-        document.body.classList.toggle(
-            "dark-mode",
-            theme === "dark"
-        );
+        const isDark = theme === "dark";
+
+        document.body.classList.toggle("dark-mode", isDark);
 
         if (themeIcon) {
-
             themeIcon.setAttribute(
                 "href",
-                theme === "dark" ? "#i-sun" : "#i-moon"
+                isDark ? "#i-sun" : "#i-moon"
             );
-
         }
 
         if (themeToggle) {
 
-            themeToggle.setAttribute(
-                "aria-label",
-                theme === "dark"
-                    ? "تفعيل الوضع النهاري"
-                    : "تفعيل الوضع الليلي"
-            );
+            const label = isDark
+                ? "تفعيل الوضع النهاري"
+                : "تفعيل الوضع الليلي";
 
-            themeToggle.setAttribute(
-                "title",
-                theme === "dark"
-                    ? "تفعيل الوضع النهاري"
-                    : "تفعيل الوضع الليلي"
-            );
-
+            themeToggle.setAttribute("aria-label", label);
+            themeToggle.setAttribute("title", label);
         }
-
     }
 
 
@@ -253,14 +208,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let savedTheme = "light";
 
     try {
-
-        savedTheme =
-            localStorage.getItem("ejad-theme") || "light";
-
+        savedTheme = localStorage.getItem("ejad-theme") || "light";
     } catch (error) {
-
         savedTheme = "light";
-
     }
 
     applyTheme(savedTheme);
@@ -278,19 +228,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     : "dark";
 
             try {
-
                 localStorage.setItem("ejad-theme", newTheme);
-
             } catch (error) {
-
                 console.warn("تعذر حفظ إعداد الإضاءة.");
-
             }
 
             applyTheme(newTheme);
-
         });
-
     }
 
 });
