@@ -1,20 +1,149 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#eef3f8">
 
     <title>منصة إيجاد الرقمية بالكلية التقنية بالطائف</title>
 
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* تجاوب الجوال وإعدادات العرض الداخلي دون المساس بالتنسيق الأصلي */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        @media (max-width: 768px) {
+            .nav-glass {
+                flex-wrap: wrap;
+                padding: 10px 12px;
+                gap: 8px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .nav-logo {
+                max-width: 130px;
+                height: auto;
+            }
+            .nav-search-bar {
+                order: 3;
+                width: 100%;
+                flex: 1 1 100%;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            .nav-icons {
+                margin-right: auto;
+                gap: 6px;
+            }
+            .hero {
+                padding: 30px 15px;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            .hero-content h1 {
+                font-size: 1.45rem;
+                line-height: 1.5;
+            }
+            .hero-content p {
+                font-size: 0.95rem;
+            }
+            .services-list, .app-page-view {
+                padding: 15px 12px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .service-card {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 16px;
+            }
+            .sidebar {
+                width: 80%;
+                max-width: 300px;
+            }
+            .notif-box {
+                width: 92%;
+                left: 4%;
+                right: 4%;
+                box-sizing: border-box;
+            }
+        }
+        .app-page-view {
+            display: none;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .app-page-view.active-view {
+            display: block;
+        }
+        .app-back-btn {
+            background: transparent;
+            border: 1px solid currentColor;
+            color: inherit;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .app-req-list {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 20px 0;
+        }
+        .app-req-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+            font-size: 0.95rem;
+        }
+        .app-form-group {
+            margin-bottom: 14px;
+            text-align: right;
+        }
+        .app-form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .app-form-group input,
+        .app-form-group select,
+        .app-form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(128, 128, 128, 0.35);
+            background: rgba(255, 255, 255, 0.08);
+            color: inherit;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        .app-submit-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: #1b6ca8;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+    </style>
 </head>
 
 <body>
 
 <!-- SVG ICON SYSTEM -->
-<svg xmlns="http://www.w3.org/2000/svg"
+<svg xmlns="http://w3.org"
      class="svg-library" aria-hidden="true">
 
     <symbol id="i-search" viewBox="0 0 24 24">
@@ -92,7 +221,9 @@
 
     <img src="logo.png"
          class="nav-logo"
-         alt="شعار منصة إيجاد">
+         alt="شعار منصة إيجاد"
+         data-page="home"
+         style="cursor: pointer;">
 
     <div class="nav-search-bar">
 
@@ -139,13 +270,13 @@
     <div class="nav-icons">
 
         <button class="nav-btn"
-                onclick="location.href='info.html'"
+                data-page="info"
                 aria-label="معلومات">
             <svg class="ui-icon"><use href="#i-info"/></svg>
         </button>
 
         <button class="nav-btn"
-                onclick="location.href='help.html'"
+                data-page="help"
                 aria-label="المساعدة">
             <svg class="ui-icon"><use href="#i-help"/></svg>
         </button>
@@ -181,108 +312,37 @@
                 aria-label="إغلاق">&times;</button>
     </div>
 
-    <a href="index.html">الرئيسية</a>
-    <a href="new-item.html">تسجيل غرض جديد</a>
-    <a href="qr.html">إنشاء QR</a>
-    <a href="report.html">الإبلاغ عن غرض مفقود</a>
-    <a href="lost-list.html">قائمة المفقودات</a>
-    <a href="support.html">الدعم الفني</a>
-    <a href="info.html">عن المنصة</a>
-    <a href="help.html">المساعدة</a>
+    <a href="#home" data-page="home">الرئيسية</a>
+    <a href="#new-item" data-page="new-item">تسجيل غرض جديد</a>
+    <a href="#qr" data-page="qr">إنشاء QR</a>
+    <a href="#report" data-page="report">الإبلاغ عن غرض مفقود</a>
+    <a href="#lost-list" data-page="lost-list">قائمة المفقودات</a>
+    <a href="#support" data-page="support">الدعم الفني</a>
+    <a href="#info" data-page="info">عن المنصة</a>
+    <a href="#help" data-page="help">المساعدة</a>
 
 </aside>
 
-<!-- HERO -->
-<header class="hero">
+<!-- HOME VIEW -->
+<main id="view-home">
+    <!-- HERO -->
+    <header class="hero">
 
-    <div class="hero-layer"></div>
+        <div class="hero-layer"></div>
 
-    <div class="hero-content">
+        <div class="hero-content">
 
-        <h1>منصة إيجاد الرقمية بالكلية التقنية بالطائف</h1>
+            <h1>منصة إيجاد الرقمية بالكلية التقنية بالطائف</h1>
 
-        <p>
-            منصة إلكترونية متطورة للإبلاغ عن المفقودات
-            وتسجيلها وتتبعها واسترجاعها
-        </p>
+            <p>
+                منصة إلكترونية متطورة للإبلاغ عن المفقودات
+                وتسجيلها وتتبعها واسترجاعها
+            </p>
 
-    </div>
-
-    <div class="scroll-bounce">⟱</div>
-
-</header>
-
-<!-- SERVICES -->
-<section class="services-list">
-
-    <a href="new-item.html" class="service-card">
-
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-add"/></svg>
         </div>
 
-        <div class="service-text">
-            <h3>تسجيل غرض جديد</h3>
-            <p>استخدم هذه الخدمة لتسجيل غرض جديد مفقود أو معثور عليه في النظام.</p>
-        </div>
+        <div class="scroll-bounce">⟱</div>
 
-    </a>
+    </header>
 
-    <a href="qr.html" class="service-card">
-
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-qr"/></svg>
-        </div>
-
-        <div class="service-text">
-            <h3>إنشاء QR</h3>
-            <p>إنشاء رمز QR مخصص ليسهل الوصول إلى بيانات الغرض بسرعة.</p>
-        </div>
-
-    </a>
-
-    <a href="report.html" class="service-card">
-
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-search"/></svg>
-        </div>
-
-        <div class="service-text">
-            <h3>الإبلاغ عن غرض مفقود</h3>
-            <p>إرسال بلاغ عن غرض مفقود مع تفاصيل تساعد في العثور عليه.</p>
-        </div>
-
-    </a>
-
-    <a href="lost-list.html" class="service-card">
-
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-list"/></svg>
-        </div>
-
-        <div class="service-text">
-            <h3>قائمة المفقودات</h3>
-            <p>عرض جميع الأغراض والبلاغات في النظام.</p>
-        </div>
-
-    </a>
-
-    <a href="support.html" class="service-card">
-
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-support"/></svg>
-        </div>
-
-        <div class="service-text">
-            <h3>الدعم الفني</h3>
-            <p>تواصل مباشر مع فريق الدعم لحل أي مشكلة تواجهك.</p>
-        </div>
-
-    </a>
-
-</section>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+    <!-- SERVICES -->
