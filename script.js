@@ -286,15 +286,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const inputs = form.querySelectorAll("input, select, textarea");
         const listContainer = document.getElementById("items-list-container");
 
-        // إضافة الغرض تلقائياً إلى قائمة المفقودات إذا كان من نموذج تسجيل أو بلاغ
         if (listContainer && (form.closest("#modal-new-item") || form.closest("#modal-report"))) {
             const isNewItem = Boolean(form.closest("#modal-new-item"));
             const statusText = isNewItem
                 ? (inputs[0].value === "found" ? "معثور عليه" : "مفقود")
                 : "مفقود";
             const badgeColor = statusText === "معثور عليه" ? "#0284c7" : "#d97706";
-            const itemName = isNewItem ? inputs[1].value : inputs[1].value;
-            const itemLocation = isNewItem ? inputs[2].value : inputs[2].value;
+            const itemName = inputs[1].value;
+            const itemLocation = inputs[2].value;
 
             const card = document.createElement("div");
             card.className = "ejad-list-card";
