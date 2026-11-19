@@ -19,11 +19,11 @@
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
+            z-index: 99999;
             padding: 16px;
         }
         .ejad-modal-overlay.active {
-            display: flex;
+            display: flex !important;
             animation: fadeInModal 0.25s ease;
         }
         @keyframes fadeInModal {
@@ -267,24 +267,24 @@
     <!-- NAV ICONS -->
     <div class="nav-icons">
 
-        <button class="nav-btn"
+        <button class="nav-btn" type="button"
                 onclick="openModal('modal-info')"
                 aria-label="معلومات">
             <svg class="ui-icon"><use href="#i-info"/></svg>
         </button>
 
-        <button class="nav-btn"
+        <button class="nav-btn" type="button"
                 onclick="openModal('modal-help')"
                 aria-label="المساعدة">
             <svg class="ui-icon"><use href="#i-help"/></svg>
         </button>
 
-        <button class="nav-btn" id="btn-bell"
+        <button class="nav-btn" id="btn-bell" type="button"
                 aria-label="التنبيهات">
             <svg class="ui-icon"><use href="#i-bell"/></svg>
         </button>
 
-        <button class="nav-btn" id="theme-toggle"
+        <button class="nav-btn" id="theme-toggle" type="button"
                 aria-label="تفعيل الوضع الليلي"
                 title="تفعيل الوضع الليلي">
             <svg class="ui-icon">
@@ -292,7 +292,7 @@
             </svg>
         </button>
 
-        <button class="nav-btn" id="btn-menu"
+        <button class="nav-btn" id="btn-menu" type="button"
                 aria-label="القائمة">
             <svg class="ui-icon"><use href="#i-menu"/></svg>
         </button>
@@ -317,84 +317,6 @@
     <a href="#" onclick="openModal('modal-lost-list'); return false;">قائمة المفقودات</a>
     <a href="#" onclick="openModal('modal-support'); return false;">الدعم الفني</a>
     <a href="#" onclick="openModal('modal-info'); return false;">عن المنصة</a>
-    <a href="#" onclick="openModal('modal-help'); return false;">المساعدة</a>
-
-</aside>
-<!-- HERO -->
-<header class="hero">
-
-    <div class="hero-layer"></div>
-
-    <div class="hero-content">
-
-        <h1>منصة إيجاد الرقمية بالكلية التقنية بالطائف</h1>
-
-        <p>
-            منصة إلكترونية متطورة للإبلاغ عن المفقودات
-            وتسجيلها وتتبعها واسترجاعها
-        </p>
-
-    </div>
-
-    <div class="scroll-bounce">⟱</div>
-
-</header>
-
-<!-- SERVICES -->
-<section class="services-list">
-
-    <a href="#" onclick="openModal('modal-new-item'); return false;" class="service-card">
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-add"/></svg>
-        </div>
-        <div class="service-text">
-            <h3>تسجيل غرض جديد</h3>
-            <p>استخدم هذه الخدمة لتسجيل غرض جديد مفقود أو معثور عليه في النظام.</p>
-        </div>
-    </a>
-
-    <a href="#" onclick="openModal('modal-qr'); return false;" class="service-card">
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-qr"/></svg>
-        </div>
-        <div class="service-text">
-            <h3>إنشاء QR</h3>
-            <p>إنشاء رمز QR مخصص ليسهل الوصول إلى بيانات الغرض بسرعة.</p>
-        </div>
-    </a>
-
-    <a href="#" onclick="openModal('modal-report'); return false;" class="service-card">
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-search"/></svg>
-        </div>
-        <div class="service-text">
-            <h3>الإبلاغ عن غرض مفقود</h3>
-            <p>إرسال بلاغ عن غرض مفقود مع تفاصيل تساعد في العثور عليه.</p>
-        </div>
-    </a>
-
-    <a href="#" onclick="openModal('modal-lost-list'); return false;" class="service-card">
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-list"/></svg>
-        </div>
-        <div class="service-text">
-            <h3>قائمة المفقودات</h3>
-            <p>عرض جميع الأغراض والبلاغات في النظام.</p>
-        </div>
-    </a>
-
-    <a href="#" onclick="openModal('modal-support'); return false;" class="service-card">
-        <div class="icon-circle">
-            <svg class="ui-icon"><use href="#i-support"/></svg>
-        </div>
-        <div class="service-text">
-            <h3>الدعم الفني</h3>
-            <p>تواصل مباشر مع فريق الدعم لحل أي مشكلة تواجهك.</p>
-        </div>
-    </a>
-
-</section>
-
 <!-- MODALS -->
 <div id="modal-new-item" class="ejad-modal-overlay">
     <div class="ejad-modal-box">
@@ -561,3 +483,63 @@
                 <label>تفاصيل الرسالة</label>
                 <textarea rows="4" placeholder="اكتب رسالتك هنا..." required></textarea>
             </div>
+            <button type="submit" class="ejad-submit-btn">إرسال للدعم الفني</button>
+        </form>
+    </div>
+</div>
+
+<div id="modal-info" class="ejad-modal-overlay">
+    <div class="ejad-modal-box">
+        <div class="ejad-modal-header">
+            <h3>عن منصة إيجاد الرقمية</h3>
+            <button type="button" class="ejad-close-btn" onclick="closeModal('modal-info')">&times;</button>
+        </div>
+        <p style="line-height:1.8;">
+            <strong>منصة إيجاد الرقمية</strong> هي مبادرة تقنية ذكية موجهة لمنسوبي ومتدربي <strong>الكلية التقنية بالطائف</strong>، تهدف إلى أتمتة عملية الإبلاغ عن المفقودات والمعثورات وتسهيل استرجاعها بسرعة وموثوقية عبر تقنيات رموز الاستجابة السريعة (QR) ونظام المطابقة الفورية.
+        </p>
+    </div>
+</div>
+
+<div id="modal-help" class="ejad-modal-overlay">
+    <div class="ejad-modal-box">
+        <div class="ejad-modal-header">
+            <h3>المساعدة والأسئلة الشائعة</h3>
+            <button type="button" class="ejad-close-btn" onclick="closeModal('modal-help')">&times;</button>
+        </div>
+        <div style="line-height:1.7;">
+            <p><strong>• كيف أسجل غرضاً وجدته؟</strong><br>اضغط على أيقونة "تسجيل غرض جديد" وأدخل بيانات الغرض ومكان العثور عليه.</p>
+            <p><strong>• كيف أحمي أغراضي الشخصية؟</strong><br>استخدم خدمة "إنشاء QR" لطباعة ملصق خاص يحمل بيانات تواصلك.</p>
+            <p><strong>• أين أستلم غرضي المفقود؟</strong><br>بعد مطابقة البلاغ، يتم التسليم عبر مكتب الأمن والسلامة أو شؤون المتدربين بالكلية.</p>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+    function openModal(id) {
+        closeAllModals();
+        var sidebar = document.getElementById("sidebar");
+        if (sidebar) sidebar.classList.remove("open");
+        var notifBox = document.getElementById("notif-box");
+        if (notifBox) notifBox.classList.remove("show");
+        var modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add("active");
+        }
+    }
+
+    function closeModal(id) {
+        var modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.remove("active");
+        }
+    }
+
+    function closeAllModals() {
+        var modals = document.querySelectorAll(".ejad-modal-overlay");
+        for (var i = 0; i < modals.length; i++) {
+            modals[i].classList.remove("active");
+        }
+    }
+
