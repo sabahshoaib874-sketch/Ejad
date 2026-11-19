@@ -4,240 +4,544 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#eef3f8">
+
     <title>منصة إيجاد الرقمية بالكلية التقنية بالطائف</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .ejad-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 16px;
+        }
+        .ejad-modal-overlay.active {
+            display: flex;
+            animation: fadeInModal 0.25s ease;
+        }
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .ejad-modal-box {
+            background: var(--card-bg, #ffffff);
+            color: var(--text-color, #1e293b);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            max-height: 88vh;
+            overflow-y: auto;
+        }
+        body.dark .ejad-modal-box,
+        [data-theme="dark"] .ejad-modal-box {
+            background: #1e293b;
+            color: #f8fafc;
+        }
+        .ejad-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+        .ejad-modal-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+        .ejad-close-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.7rem;
+            line-height: 1;
+            cursor: pointer;
+            color: inherit;
+            padding: 0 6px;
+        }
+        .ejad-form-group {
+            margin-bottom: 14px;
+            text-align: right;
+        }
+        .ejad-form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+        .ejad-form-group input,
+        .ejad-form-group select,
+        .ejad-form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: rgba(248, 250, 252, 0.8);
+            color: #0f172a;
+            font-family: inherit;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+        body.dark .ejad-form-group input,
+        body.dark .ejad-form-group select,
+        body.dark .ejad-form-group textarea,
+        [data-theme="dark"] .ejad-form-group input,
+        [data-theme="dark"] .ejad-form-group select,
+        [data-theme="dark"] .ejad-form-group textarea {
+            background: #0f172a;
+            color: #f8fafc;
+            border-color: #334155;
+        }
+        .ejad-submit-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: #0284c7;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: background 0.2s;
+        }
+        .ejad-submit-btn:hover {
+            background: #0369a1;
+        }
+        .ejad-list-card {
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(148, 163, 184, 0.12);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ejad-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background: #0284c7;
+            color: #fff;
+        }
+        .qr-preview-box {
+            text-align: center;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(148, 163, 184, 0.1);
+            display: none;
+        }
+    </style>
 </head>
+
 <body>
 
-<svg xmlns="http://w3.org" class="svg-library" aria-hidden="true">
-    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
-    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
-    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.6 2.6 0 1 1 4.5 1.8c-1.2 1.1-2 1.5-2 3"/><path d="M12 17.5h.01"/></symbol>
-    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></symbol>
-    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
-    <symbol id="i-add" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-    <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v2M14 20h2M19 19h2v2h-2z"/></symbol>
-    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></symbol>
-    <symbol id="i-support" viewBox="0 0 24 24"><path d="M3 13v-2a9 9 0 0 1 18 0v2"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/><path d="M17 19a5 5 0 0 1-5 3h-2"/></symbol>
-    <symbol id="i-package" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="M3 8v9l9 5 9-5V8M12 13v9M7.5 5.5l9 5"/></symbol>
-    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></symbol>
-    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></symbol>
-    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"/></symbol>
+<!-- SVG ICON SYSTEM -->
+<svg xmlns="http://w3.org"
+     class="svg-library" aria-hidden="true">
+
+    <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="10.8" cy="10.8" r="6.8"/>
+        <path d="m16 16 5 5"/>
+    </symbol>
+
+    <symbol id="i-info" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 11v6M12 7h.01"/>
+    </symbol>
+
+    <symbol id="i-help" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M9.5 9a2.6 2.6 0 1 1 4.5 1.8c-1.2 1.1-2 1.5-2 3"/>
+        <path d="M12 17.5h.01"/>
+    </symbol>
+
+    <symbol id="i-bell" viewBox="0 0 24 24">
+        <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+        <path d="M10 21h4"/>
+    </symbol>
+
+    <symbol id="i-menu" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+    </symbol>
+
+    <symbol id="i-add" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14"/>
+    </symbol>
+
+    <symbol id="i-qr" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/>
+        <path d="M14 14h3v3h-3zM20 14v2M14 20h2M19 19h2v2h-2z"/>
+    </symbol>
+
+    <symbol id="i-list" viewBox="0 0 24 24">
+        <path d="M9 6h11M9 12h11M9 18h11"/>
+        <circle cx="4" cy="6" r="1"/>
+        <circle cx="4" cy="12" r="1"/>
+        <circle cx="4" cy="18" r="1"/>
+    </symbol>
+
+    <symbol id="i-support" viewBox="0 0 24 24">
+        <path d="M3 13v-2a9 9 0 0 1 18 0v2"/>
+        <rect x="3" y="12" width="4" height="7" rx="2"/>
+        <rect x="17" y="12" width="4" height="7" rx="2"/>
+        <path d="M17 19a5 5 0 0 1-5 3h-2"/>
+    </symbol>
+
+    <symbol id="i-package" viewBox="0 0 24 24">
+        <path d="m12 3 9 5-9 5-9-5 9-5Z"/>
+        <path d="M3 8v9l9 5 9-5V8M12 13v9M7.5 5.5l9 5"/>
+    </symbol>
+
+    <symbol id="i-star" viewBox="0 0 24 24">
+        <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>
+    </symbol>
+
+    <symbol id="i-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>
+    </symbol>
+
+    <symbol id="i-moon" viewBox="0 0 24 24">
+        <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"/>
+    </symbol>
+
 </svg>
 
+<!-- NAVIGATION -->
 <nav class="nav-glass">
-    <img src="logo.png" class="nav-logo" alt="شعار منصة إيجاد" onclick="openAppPage('home')" style="cursor:pointer;">
+
+    <img src="logo.png"
+         class="nav-logo"
+         alt="شعار منصة إيجاد">
+
     <div class="nav-search-bar">
-        <button class="search-action" id="search-button" aria-label="بحث" type="button"><svg class="ui-icon"><use href="#i-search"></use></svg></button>
-        <input type="search" placeholder="ابحث هنا..." id="site-search">
+
+        <button class="search-action" id="search-button"
+                aria-label="بحث" type="button">
+            <svg class="ui-icon">
+                <use href="#i-search"></use>
+            </svg>
+        </button>
+
+        <input type="search"
+               placeholder="ابحث هنا..."
+               id="site-search">
+
     </div>
+
+    <!-- NOTIFICATIONS -->
     <div id="notif-box" class="notif-box">
-        <div class="notif-header"><h3>التنبيهات</h3><button id="close-notif" type="button" aria-label="إغلاق">&times;</button></div>
-        <div class="notif-item"><svg class="ui-icon"><use href="#i-bell"/></svg>تم إضافة غرض جديد في قائمة المفقودات.</div>
-        <div class="notif-item"><svg class="ui-icon"><use href="#i-package"/></svg>تم العثور على غرض مطابق لبلاغك.</div>
-        <div class="notif-item"><svg class="ui-icon"><use href="#i-star"/></svg>لا توجد تنبيهات جديدة حالياً.</div>
+
+        <div class="notif-header">
+            <h3>التنبيهات</h3>
+            <button id="close-notif" type="button"
+                    aria-label="إغلاق">&times;</button>
+        </div>
+
+        <div class="notif-item">
+            <svg class="ui-icon"><use href="#i-bell"/></svg>
+            تم إضافة غرض جديد في قائمة المفقودات.
+        </div>
+
+        <div class="notif-item">
+            <svg class="ui-icon"><use href="#i-package"/></svg>
+            تم العثور على غرض مطابق لبلاغك.
+        </div>
+
+        <div class="notif-item">
+            <svg class="ui-icon"><use href="#i-star"/></svg>
+            لا توجد تنبيهات جديدة حالياً.
+        </div>
+
     </div>
+
+    <!-- NAV ICONS -->
     <div class="nav-icons">
-        <button class="nav-btn" type="button" onclick="openAppPage('info')" aria-label="معلومات"><svg class="ui-icon"><use href="#i-info"/></svg></button>
-        <button class="nav-btn" type="button" onclick="openAppPage('help')" aria-label="المساعدة"><svg class="ui-icon"><use href="#i-help"/></svg></button>
-        <button class="nav-btn" type="button" id="btn-bell" aria-label="التنبيهات"><svg class="ui-icon"><use href="#i-bell"/></svg></button>
-        <button class="nav-btn" type="button" id="theme-toggle" aria-label="تفعيل الوضع الليلي"><svg class="ui-icon"><use id="theme-icon" href="#i-moon"/></svg></button>
-        <button class="nav-btn" type="button" id="btn-menu" aria-label="القائمة"><svg class="ui-icon"><use href="#i-menu"/></svg></button>
+
+        <button class="nav-btn"
+                onclick="openModal('modal-info')"
+                aria-label="معلومات">
+            <svg class="ui-icon"><use href="#i-info"/></svg>
+        </button>
+
+        <button class="nav-btn"
+                onclick="openModal('modal-help')"
+                aria-label="المساعدة">
+            <svg class="ui-icon"><use href="#i-help"/></svg>
+        </button>
+
+        <button class="nav-btn" id="btn-bell"
+                aria-label="التنبيهات">
+            <svg class="ui-icon"><use href="#i-bell"/></svg>
+        </button>
+
+        <button class="nav-btn" id="theme-toggle"
+                aria-label="تفعيل الوضع الليلي"
+                title="تفعيل الوضع الليلي">
+            <svg class="ui-icon">
+                <use id="theme-icon" href="#i-moon"/>
+            </svg>
+        </button>
+
+        <button class="nav-btn" id="btn-menu"
+                aria-label="القائمة">
+            <svg class="ui-icon"><use href="#i-menu"/></svg>
+        </button>
+
     </div>
+
 </nav>
 
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header"><h3>منصة إيجاد الرقمية</h3><button id="closeSidebar" type="button" aria-label="إغلاق">&times;</button></div>
-    <a href="javascript:void(0)" onclick="openAppPage('home')">الرئيسية</a>
-    <a href="javascript:void(0)" onclick="openAppPage('new-item')">تسجيل غرض جديد</a>
-    <a href="javascript:void(0)" onclick="openAppPage('qr')">إنشاء QR</a>
-    <a href="javascript:void(0)" onclick="openAppPage('report')">الإبلاغ عن غرض مفقود</a>
-    <a href="javascript:void(0)" onclick="openAppPage('lost-list')">قائمة المفقودات</a>
-    <a href="javascript:void(0)" onclick="openAppPage('support')">الدعم الفني</a>
-    <a href="javascript:void(0)" onclick="openAppPage('info')">عن المنصة</a>
-    <a href="javascript:void(0)" onclick="openAppPage('help')">المساعدة</a>
-</aside>
-    <div id="view-home">
-    <header class="hero">
-        <div class="hero-layer"></div>
-        <div class="hero-content">
-            <h1>منصة إيجاد الرقمية بالكلية التقنية بالطائف</h1>
-            <p>منصة إلكترونية متطورة للإبلاغ عن المفقودات وتسجيلها وتتبعها واسترجاعها</p>
+
+    <div class="sidebar-header">
+        <h3>منصة إيجاد الرقمية</h3>
+        <button id="closeSidebar" type="button"
+                aria-label="إغلاق">&times;</button>
+    </div>
+
+    <a href="#" onclick="closeAllModals(); return false;">الرئيسية</a>
+    <a href="#" onclick="openModal('modal-new-item'); return false;">تسجيل غرض جديد</a>
+    <a href="#" onclick="openModal('modal-qr'); return false;">إنشاء QR</a>
+    <a href="#" onclick="openModal('modal-report'); return false;">الإبلاغ عن غرض مفقود</a>
+    <a href="#" onclick="openModal('modal-lost-list'); return false;">قائمة المفقودات</a>
+    <a href="#" onclick="openModal('modal-support'); return false;">الدعم الفني</a>
+<!-- MODALS (نوافذ العمليات داخل نفس الصفحة) -->
+<div id="modal-new-item" class="ejad-modal-overlay">
+    <div class="ejad-modal-box">
+        <div class="ejad-modal-header">
+            <h3>تسجيل غرض جديد</h3>
+            <button type="button" class="ejad-close-btn" onclick="closeModal('modal-new-item')">&times;</button>
         </div>
-        <div class="scroll-bounce">⟱</div>
-    </header>
-
-    <section class="services-list">
-        <a href="javascript:void(0)" onclick="openAppPage('new-item')" class="service-card">
-            <div class="icon-circle"><svg class="ui-icon"><use href="#i-add"/></svg></div>
-            <div class="service-text">
-                <h3>تسجيل غرض جديد</h3>
-                <p>استخدم هذه الخدمة لتسجيل غرض جديد مفقود أو معثور عليه في النظام.</p>
+        <form onsubmit="handleFormSubmit(event, 'تم تسجيل الغرض بنجاح في النظام!')">
+            <div class="ejad-form-group">
+                <label>حالة الغرض</label>
+                <select required>
+                    <option value="found">غرض معثور عليه</option>
+                    <option value="lost">غرض مفقود</option>
+                </select>
             </div>
-        </a>
-
-        <a href="javascript:void(0)" onclick="openAppPage('qr')" class="service-card">
-            <div class="icon-circle"><svg class="ui-icon"><use href="#i-qr"/></svg></div>
-            <div class="service-text">
-                <h3>إنشاء QR</h3>
-                <p>إنشاء رمز QR مخصص ليسهل الوصول إلى بيانات الغرض بسرعة.</p>
+            <div class="ejad-form-group">
+                <label>اسم الغرض</label>
+                <input type="text" placeholder="مثال: محفظة جلدية، سماعات، بطاقة تدريبية" required>
             </div>
-        </a>
-
-        <a href="javascript:void(0)" onclick="openAppPage('report')" class="service-card">
-            <div class="icon-circle"><svg class="ui-icon"><use href="#i-search"/></svg></div>
-            <div class="service-text">
-                <h3>الإبلاغ عن غرض مفقود</h3>
-                <p>إرسال بلاغ عن غرض مفقود مع تفاصيل تساعد في العثور عليه.</p>
+            <div class="ejad-form-group">
+                <label>الموقع داخل الكلية</label>
+                <input type="text" placeholder="مثال: مبنى التقنية الإدارية - قاعة 104" required>
             </div>
-        </a>
-
-        <a href="javascript:void(0)" onclick="openAppPage('lost-list')" class="service-card">
-            <div class="icon-circle"><svg class="ui-icon"><use href="#i-list"/></svg></div>
-            <div class="service-text">
-                <h3>قائمة المفقودات</h3>
-                <p>عرض جميع الأغراض والبلاغات في النظام.</p>
+            <div class="ejad-form-group">
+                <label>التاريخ</label>
+                <input type="date" required>
             </div>
-        </a>
-
-        <a href="javascript:void(0)" onclick="openAppPage('support')" class="service-card">
-            <div class="icon-circle"><svg class="ui-icon"><use href="#i-support"/></svg></div>
-            <div class="service-text">
-                <h3>الدعم الفني</h3>
-                <p>تواصل مباشر مع فريق الدعم لحل أي مشكلة تواجهك.</p>
+            <div class="ejad-form-group">
+                <label>وصف إضافي</label>
+                <textarea rows="3" placeholder="اكتب اللون أو العلامات المميزة..."></textarea>
             </div>
-        </a>
-    </section>
+            <div class="ejad-form-group">
+                <label>رقم التواصل (الجوال)</label>
+                <input type="tel" placeholder="05xxxxxxxx" required>
+            </div>
+            <button type="submit" class="ejad-submit-btn">حفظ وتسجيل الغرض</button>
+        </form>
+    </div>
 </div>
 
-<section id="view-new-item" class="app-page-view" style="display:none;">
-    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
-    <div class="service-card app-detail-card">
-        <div class="service-text" style="width:100%;">
-            <h3>تسجيل غرض جديد</h3>
-            <p><strong>متطلبات الخدمة:</strong></p>
-            <ul class="app-req-list">
-                <li>• تحديد حالة الغرض (معثور عليه داخل الكلية / مفقود).</li>
-                <li>• كتابة اسم الغرض ووصفه الدقيق (اللون، النوع، العلامة المميزة).</li>
-                <li>• تحديد المبنى أو القاعة التي تم العثور على الغرض فيها.</li>
-                <li>• إدخال الرقم التدريبي أو الوظيفي ورقم الجوال للتواصل.</li>
-            </ul>
-            <form onsubmit="submitInternalForm(event, 'تم تسجيل الغرض في النظام بنجاح')">
-                <div class="app-form-group"><label>حالة الغرض</label><select required><option value="found">غرض معثور عليه</option><option value="lost">غرض مفقود</option></select></div>
-                <div class="app-form-group"><label>اسم الغرض</label><input type="text" placeholder="مثال: محفظة جلدية، بطاقة تدريبية" required></div>
-                <div class="app-form-group"><label>مكان العثور / الفقدان</label><input type="text" placeholder="مثال: مبنى 4 - قاعة 102" required></div>
-                <div class="app-form-group"><label>الوصف والتفاصيل</label><textarea rows="3" placeholder="اكتب المواصفات الدقيقة..." required></textarea></div>
-                <div class="app-form-group"><label>الرقم التدريبي / الوظيفي ورقم الجوال</label><input type="text" placeholder="أدخل رقمك التدريبي ورقم الجوال" required></div>
-                <button type="submit" class="app-submit-btn">حفظ وتسجيل الغرض</button>
-            </form>
+<div id="modal-qr" class="ejad-modal-overlay">
+    <div class="ejad-modal-box">
+        <div class="ejad-modal-header">
+            <h3>إنشاء رمز QR للغرض</h3>
+            <button type="button" class="ejad-close-btn" onclick="closeModal('modal-qr')">&times;</button>
+        </div>
+        <form onsubmit="generateItemQR(event)">
+            <div class="ejad-form-group">
+                <label>اسم صاحب الغرض</label>
+                <input type="text" id="qr-owner" placeholder="الاسم الثلاثي" required>
+            </div>
+            <div class="ejad-form-group">
+                <label>الرقم التدريبي أو الوظيفي</label>
+                <input type="text" id="qr-id" placeholder="44xxxxxxx" required>
+            </div>
+            <div class="ejad-form-group">
+                <label>اسم الغرض (حقيبة، لابتوب، مفاتيح...)</label>
+                <input type="text" id="qr-item" placeholder="اكتب اسم الغرض" required>
+            </div>
+            <div class="ejad-form-group">
+                <label>رقم الجوال للتواصل عند العثور عليه</label>
+                <input type="tel" id="qr-phone" placeholder="05xxxxxxxx" required>
+            </div>
+            <button type="submit" class="ejad-submit-btn">توليد رمز QR الآن</button>
+        </form>
+        <div id="qr-result" class="qr-preview-box">
+            <p style="margin-top:0; font-weight:bold;">تم إنشاء الرمز بنجاح! يمكنك طباعته وإلصاقه على الغرض:</p>
+            <img id="qr-image" src="" alt="QR Code" style="width:160px; height:160px; border-radius:8px; background:#fff; padding:8px;">
         </div>
     </div>
-</section>
+</div>
 
-<section id="view-qr" class="app-page-view" style="display:none;">
-    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
-    <div class="service-card app-detail-card">
-        <div class="service-text" style="width:100%;">
-            <h3>إنشاء رمز QR للأغراض</h3>
-            <p><strong>متطلبات الخدمة:</strong></p>
-            <ul class="app-req-list">
-                <li>• إدخال الاسم الكامل للمتدرب أو الموظف.</li>
-                <li>• إدخال الرقم التدريبي أو الوظيفي بالكلية التقنية بالطائف.</li>
-                <li>• إدخال رقم الجوال للتواصل الفوري عند العثور على الغرض.</li>
-            </ul>
-            <form onsubmit="generateInternalQR(event)">
-                <div class="app-form-group"><label>الاسم الكامل</label><input type="text" id="qr-name" required></div>
-                <div class="app-form-group"><label>الرقم التدريبي / الوظيفي</label><input type="text" id="qr-id" required></div>
-                <div class="app-form-group"><label>رقم الجوال</label><input type="tel" id="qr-phone" required></div>
-                <button type="submit" class="app-submit-btn">توليد رمز QR</button>
-                <div id="qr-output" style="text-align:center; margin-top:15px;"></div>
-            </form>
-        </div>
-    </div>
-</section>
-
-<section id="view-report" class="app-page-view" style="display:none;">
-    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
-    <div class="service-card app-detail-card">
-        <div class="service-text" style="width:100%;">
+<div id="modal-report" class="ejad-modal-overlay">
+    <div class="ejad-modal-box">
+        <div class="ejad-modal-header">
             <h3>الإبلاغ عن غرض مفقود</h3>
-            <p><strong>متطلبات الخدمة:</strong></p>
-            <ul class="app-req-list">
-                <li>• تحديد نوع الغرض المفقود بدقة.</li>
-                <li>• ذكر التاريخ والوقت التقريبي لفقدان الغرض.</li>
-                <li>• تحديد آخر موقع تواجدت فيه داخل الكلية وعلامات الملكية.</li>
-            </ul>
-            <form onsubmit="submitInternalForm(event, 'تم إرسال بلاغك بنجاح')">
-                <div class="app-form-group"><label>نوع الغرض المفقود</label><input type="text" required></div>
-                <div class="app-form-group"><label>تاريخ ووقت الفقدان</label><input type="datetime-local" required></div>
-                <div class="app-form-group"><label>آخر موقع متوقع</label><input type="text" required></div>
-                <div class="app-form-group"><label>علامات إثبات الملكية</label><textarea rows="3" required></textarea></div>
-                <button type="submit" class="app-submit-btn">إرسال البلاغ</button>
-            </form>
+            <button type="button" class="ejad-close-btn" onclick="closeModal('modal-report')">&times;</button>
         </div>
+        <form onsubmit="handleFormSubmit(event, 'تم إرسال بلاغك بنجاح، سيتم إشعارك فور مطابقته!')">
+            <div class="ejad-form-group">
+                <label>اسم المبلّغ</label>
+                <input type="text" placeholder="أدخل اسمك الكامل" required>
+            </div>
+            <div class="ejad-form-group">
+                <label>ما هو الغرض المفقود؟</label>
+                <input type="text" placeholder="مثال: جوال آيفون، مفتاح سيارة..." required>
+            </div>
+            <div class="ejad-form-group">
+                <label>آخر مكان تواجدت فيه</label>
+                <input type="text" placeholder="مثال: الكافتيريا، مواقف المتدربين..." required>
+            </div>
+            <div class="ejad-form-group">
+                <label>تفاصيل ومواصفات الغرض</label>
+                <textarea rows="3" placeholder="اللون، النوع، أي علامة تميزه..." required></textarea>
+            </div>
+            <div class="ejad-form-group">
+                <label>رقم الجوال</label>
+                <input type="tel" placeholder="05xxxxxxxx" required>
+            </div>
+            <button type="submit" class="ejad-submit-btn">إرسال البلاغ</button>
+        </form>
     </div>
-</section>
+</div>
 
-<section id="view-lost-list" class="app-page-view" style="display:none;">
-    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
-    <div class="service-card app-detail-card">
-        <div class="service-text" style="width:100%;">
+<div id="modal-lost-list" class="ejad-modal-overlay">
+    <div class="ejad-modal-box">
+        <div class="ejad-modal-header">
             <h3>قائمة المفقودات والمعثورات</h3>
-            <p><strong>متطلبات الاستلام:</strong></p>
-            <ul class="app-req-list">
-                <li>• مطابقة مواصفات الغرض المعروض مع غرضك المفقود.</li>
-                <li>• التوجه لمكتب شؤون المتدربين وإبراز البطاقة التدريبية.</li>
-            </ul>
-            <div class="notif-item"><strong>• حقيبة لابتوب سوداء</strong> — وُجدت في مبنى 2</div>
-            <div class="notif-item"><strong>• مفاتيح سيارة</strong> — وُجدت في الساحة الرئيسية</div>
-            <div class="notif-item"><strong>• بطاقة تدريبية</strong> — وُجدت في معمل 14</div>
+            <button type="button" class="ejad-close-btn" onclick="closeModal('modal-lost-list')">&times;</button>
+        </div>
+        <div class="ejad-form-group">
+            <input type="search" placeholder="ابحث في القائمة..." onkeyup="filterModalList(this.value)">
+        </div>
+        <div id="items-list-container">
+            <div class="ejad-list-card">
+                <div>
+                    <strong>محفظة سوداء</strong>
+                    <div style="font-size:0.85rem; opacity:0.8;">الموقع: مبنى الحاسب - الدور الثاني</div>
+                </div>
+                <span class="ejad-badge">معثور عليه</span>
+            </div>
+            <div class="ejad-list-card">
+                <div>
+                    <strong>سماعة أبل (AirPods)</strong>
+                    <div style="font-size:0.85rem; opacity:0.8;">الموقع: الساحة الرئيسية</div>
+                </div>
+                <span class="ejad-badge" style="background:#d97706;">مفقود</span>
+            </div>
+            <div class="ejad-list-card">
+                <div>
+                    <strong>مفاتيح سيارة تويوتا</strong>
+                    <div style="font-size:0.85rem; opacity:0.8;">الموقع: المسجد</div>
+                </div>
+                <span class="ejad-badge">معثور عليه</span>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
-<section id="view-support" class="app-page-view" style="display:none;">
-    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
-    <div class="service-card app-detail-card">
-        <div class="service-text" style="width:100%;">
+<div id="modal-support" class="ejad-modal-overlay">
+    <div class="ejad-modal-box">
+        <div class="ejad-modal-header">
             <h3>الدعم الفني</h3>
-            <p><strong>متطلبات التواصل:</strong></p>
-            <ul class="app-req-list">
-                <li>• إدخال الاسم والرقم التدريبي وشرح المشكلة بدقة.</li>
-            </ul>
-            <form onsubmit="submitInternalForm(event, 'تم إرسال رسالتك للدعم الفني')">
-                <div class="app-form-group"><label>الاسم والرقم التدريبي</label><input type="text" required></div>
-                <div class="app-form-group"><label>تفاصيل المشكلة</label><textarea rows="3" required></textarea></div>
-                <button type="submit" class="app-submit-btn">إرسال</button>
-            </form>
+            <button type="button" class="ejad-close-btn" onclick="closeModal('modal-support')">&times;</button>
         </div>
+        <form onsubmit="handleFormSubmit(event, 'تم إرسال رسالتك إلى فريق الدعم الفني بنجاح!')">
+            <div class="ejad-form-group">
+                <label>الاسم</label>
+                <input type="text" placeholder="أدخل اسمك" required>
+            </div>
+            <div class="ejad-form-group">
+                <label>البريد الإلكتروني أو رقم الجوال</label>
+                <input type="text" placeholder="للتواصل معك والرد على استفسارك" required>
+            </div>
+            <div class="ejad-form-group">
+                <label>نوع الطلب</label>
+                <select>
+                    <option>مشكلة تقنية في المنصة</option>
+                    <option>استفسار عن بلاغ سابق</option>
+                    <option>اقتراح تطويري</option>
+                </select>
+            </div>
+            <div class="ejad-form-group">
+                <label>تفاصيل الرسالة</label>
+                <textarea rows="4" placeholder="اكتب رسالتك هنا..." required></textarea>
+            </div>
+            <button type="submit" class="ejad-submit-btn">إرسال للدعم الفني</button>
+        </form>
     </div>
-</section>
+</div>
 
-<section id="view-info" class="app-page-view" style="display:none;">
-    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
-    <div class="service-card app-detail-card">
-        <div class="service-text" style="width:100%;">
+<div id="modal-info" class="ejad-modal-overlay">
+    <div class="ejad-modal-box">
+        <div class="ejad-modal-header">
             <h3>عن منصة إيجاد الرقمية</h3>
-            <p>منصة إلكترونية مخصصة لمنسوبي ومتدربي الكلية التقنية بالطائف لتنظيم عملية الإبلاغ عن المفقودات والمعثورات وتسجيلها واسترجاعها بكل سهولة وأمان.</p>
+            <button type="button" class="ejad-close-btn" onclick="closeModal('modal-info')">&times;</button>
         </div>
+        <p style="line-height:1.8;">
+            <strong>منصة إيجاد الرقمية</strong> هي مبادرة تقنية ذكية موجهة لمنسوبي ومتدربي <strong>الكلية التقنية بالطائف</strong>، تهدف إلى أتمتة عملية الإبلاغ عن المفقودات والمعثورات وتسهيل استرجاعها بسرعة وموثوقية عبر تقنيات رموز الاستجابة السريعة (QR) ونظام المطابقة الفورية.
+        </p>
     </div>
-</section>
+</div>
 
-<section id="view-help" class="app-page-view" style="display:none;">
-    <button type="button" class="app-back-btn" onclick="openAppPage('home')">→ العودة للرئيسية</button>
-    <div class="service-card app-detail-card">
-        <div class="service-text" style="width:100%;">
-            <h3>المساعدة ودليل الاستخدام</h3>
-            <ul class="app-req-list">
-                <li><strong>1. إذا وجدت غرضاً:</strong> اختر "تسجيل غرض جديد" وأدخل مواصفاته ومكانه.</li>
-                <li><strong>2. إذا فقدت غرضاً:</strong> ابحث في "قائمة المفقودات" أو ارفع بلاغاً.</li>
-                <li><strong>3. لحماية أغراضك:</strong> أنشئ ملصق QR خاص بك.</li>
-            </ul>
+<div id="modal-help" class="ejad-modal-overlay">
+    <div class="ejad-modal-box">
+        <div class="ejad-modal-header">
+            <h3>المساعدة والأسئلة الشائعة</h3>
+            <button type="button" class="ejad-close-btn" onclick="closeModal('modal-help')">&times;</button>
+        </div>
+        <div style="line-height:1.7;">
+            <p><strong>• كيف أسجل غرضاً وجدته؟</strong><br>اضغط على أيقونة "تسجيل غرض جديد" وأدخل بيانات الغرض ومكان العثور عليه.</p>
+            <p><strong>• كيف أحمي أغراضي الشخصية؟</strong><br>استخدم خدمة "إنشاء QR" لطباعة ملصق خاص يحمل بيانات تواصلك.</p>
+            <p><strong>• أين أستلم غرضي المفقود؟</strong><br>بعد مطابقة البلاغ، يتم التسليم عبر مكتب الأمن والسلامة أو شؤون المتدربين بالكلية.</p>
         </div>
     </div>
-</section>
+</div>
 
 <script src="script.js"></script>
-</body>
-</html>
 
+<script>
+    function openModal(id) {
+        closeAllModals();
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar) sidebar.classList.remove('active', 'open');
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('active');
+        }
+    }
+
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.remove('active');
+        }
+    }
+
+    function closeAllModals() {
+        document.querySelectorAll('.ejad-modal-overlay').forEach(m => {
+            m.classList.remove('active');
+        });
+    }
+
+    document.querySelectorAll('.ejad-modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
